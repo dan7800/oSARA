@@ -42,20 +42,20 @@ namespace AndroidCodeAnalyzer
 
         private void StartProcess()
         {
-            //UpdateStatus("Started - Clone f-Droid Repo");
-            //CloneOptions options = new CloneOptions();
-            //options.BranchName = "master";
-            //options.Checkout = true;
-            //string repo = Repository.Clone(Constants.GIT_FDROID, workingDirectory + @"\F-droid", options);
-            //UpdateStatus("Completed - Clone f-Droid Repo");
-            workingDirectory = "workingDirectory-636196629551098709";
+            UpdateStatus("Started - Clone f-Droid Repo");
+            CloneOptions options = new CloneOptions();
+            options.BranchName = "master";
+            options.Checkout = true;
+            string repo = Repository.Clone(Constants.GIT_FDROID, workingDirectory + @"\F-droid", options);
+            UpdateStatus("Completed - Clone f-Droid Repo");
+
             UpdateStatus("Started - Analyzing Metadata Files");
             SourceFileParser sp = new SourceFileParser(workingDirectory + @"\F-droid\metadata");
             FileInfo[] f = sp.Files;
             f.Count();
             List<App> apps = sp.ParseFiles();
+            UpdateStatus("Total Files Analyzed: " + apps.Count());
             UpdateStatus("Completed - Analyzing Metadata Files");
-            UpdateStatus("Total Files Analyzed: "+ apps.Count());
 
             UpdateStatus("Started - Create Database");
             Database db = new Database(workingDirectory + @"\database.sqlite", true);
