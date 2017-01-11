@@ -8,12 +8,12 @@ namespace AndroidCodeAnalyzer
 {
     class App
     {
-        int id;
+        long id;
         string name, friendlyName, summary, category, website, source, license, repoType, issueTracker;
 
         public string Category { get => category; set => category = value; }
         public string Summary { get => summary; set => summary = value; }
-        public int Id { get => id; set => id = value; }
+        public long Id { get => id; set => id = value; }
         public string License { get => license; set => license = value; }
         public string Name { get => name; set => name = value; }
         public string Source { get => source; set => source = value; }

@@ -71,7 +71,7 @@
     <Compile Include="Commit.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Database.cs" />
-    <Compile Include="File.cs" />
+    <Compile Include="CommitFile.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
