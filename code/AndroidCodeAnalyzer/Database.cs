@@ -36,6 +36,15 @@ namespace AndroidCodeAnalyzer
                     command.CommandText = Constants.CREATE_TABLE_APP_CLONE;
                     command.ExecuteNonQuery();
 
+                    command.CommandText = Constants.CREATE_TABLE_MANIFEST;
+                    command.ExecuteNonQuery();
+
+                    command.CommandText = Constants.CREATE_TABLE_MANIFEST_PERMISSION;
+                    command.ExecuteNonQuery();
+
+                    command.CommandText = Constants.CREATE_TABLE_MANIFEST_SDK;
+                    command.ExecuteNonQuery();
+
                     dbConnection.Close();
                 }
             }
@@ -88,7 +97,7 @@ namespace AndroidCodeAnalyzer
                     foreach (var commit in Commits)
                     {
                         commandText = string.Format(Constants.INSERT_TABLE_COMMIT_LOG,
-                            commit.Id,
+                            commit.GUID,
                             commit.Message.Replace("'", "''"),
                             commit.AuthorName.Replace("'", "''"),
                             commit.AuthorEmail,
@@ -104,7 +113,7 @@ namespace AndroidCodeAnalyzer
                             commandText = string.Format(Constants.INSERT_TABLE_COMMIT_LOG_FILE,
                                 file.Path,
                                 file.Operation,
-                                commit.Id,
+                                commit.GUID,
                                 (long)obj,
                                 AppID);
                             command.CommandText = commandText;
@@ -153,6 +162,30 @@ namespace AndroidCodeAnalyzer
             return app;
         }
 
+        public long GetCommitId(long AppID, string CommitGUID)
+        {
+            long id = new long();
+            using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+            {
+                dbConnection.Open();
+                using (var transaction = dbConnection.BeginTransaction())
+                {
+
+                    command.CommandText = string.Format(Constants.SELECT_COMMIT, AppID,CommitGUID);
+                    command.CommandType = System.Data.CommandType.Text;
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = Convert.ToInt64(reader[Constants.COLUMN_COMMIT_LOG_ID].ToString());
+                    }
+                }
+
+                dbConnection.Close();
+            }
+
+            return id;
+        }
+
         public void UpsertAppDonwload(long appId, DateTime dowloadDate)
         {
             string commandText = string.Format(Constants.UPSERT_TABLE_APP_CLONE, appId, dowloadDate.ToString(), dowloadDate.Ticks);
@@ -171,6 +204,37 @@ namespace AndroidCodeAnalyzer
                 dbConnection.Close();
             }
 
+        }
+
+        public void BatchInsertManifestData(List<Manifest> ManifestData)
+        {
+            using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+            {
+                dbConnection.Open();
+                string commandText;
+                using (var transaction = dbConnection.BeginTransaction())
+                {
+                    foreach (var manifest in ManifestData)
+                    {
+                        //commandText = string.Format(Constants.INSERT_TABLE_APP,
+                        //    app.Name.Replace("'", "''"),
+                        //    app.FriendlyName.Replace("'", "''"),
+                        //    app.Summary.Replace("'", "''"),
+                        //    app.Category.Replace("'", "''"),
+                        //    app.Website,
+                        //    app.License.Replace("'", "''"),
+                        //    app.RepoType,
+                        //    app.IssueTracker,
+                        //    app.Source);
+                        //command.CommandText = commandText;
+                        command.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                }
+
+                dbConnection.Close();
+            }
         }
 
         public List<App> GetApps()

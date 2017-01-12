@@ -8,14 +8,14 @@ namespace AndroidCodeAnalyzer
 {
     class Commit
     {
-        string id;
+        string guid;
         string message;
         string authorName;
         string authorEmail;
         DateTime date;
         List<CommitFile> commitFiles;
 
-        public string Id { get => id; set => id = value; }
+        public string GUID { get => guid; set => guid = value; }
         public string Message { get => message; set => message = value; }
         public string AuthorName { get => authorName; set => authorName = value; }
         public string AuthorEmail { get => authorEmail; set => authorEmail = value; }
@@ -24,7 +24,7 @@ namespace AndroidCodeAnalyzer
 
         public Commit()
         {
-            id = string.Empty;
+            guid = string.Empty;
             message = string.Empty;
             authorEmail = string.Empty;
             authorName = string.Empty;

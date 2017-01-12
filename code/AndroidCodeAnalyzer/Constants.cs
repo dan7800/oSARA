@@ -19,6 +19,16 @@ namespace AndroidCodeAnalyzer
         public static string COLUMN_APP_ISSUE_TRACKER = "ISSUE_TRACKER";
         public static string COLUMN_APP_SOURCE = "SOURCE";
 
+        public static string COLUMN_COMMIT_LOG_ID = "ID";
+        public static string COLUMN_COMMIT_LOG_GUID = "GUID";
+        public static string COLUMN_COMMIT_LOG_MESSAGE = "MESSAGE";
+        public static string COLUMN_COMMIT_LOG_AUTHOR_NAME = "AUTHOR_NAME";
+        public static string COLUMN_COMMIT_LOG_AUTHOR_EMAIL = "AUTHOR_EMAIL";
+        public static string COLUMN_COMMIT_LOG_DATE_TEXT = "DATE_TEXT";
+        public static string COLUMN_COMMIT_LOG_DATE_TICKS = "DATE_TICKS";
+        public static string COLUMN_COMMIT_LOG_APPID = "APPID";
+
+
 
 
         public static string CREATE_TABLE_APP="CREATE TABLE APP(" +
@@ -61,6 +71,49 @@ namespace AndroidCodeAnalyzer
             "LAST_DOWNLOAD_DATE_TICKS REAL" +
             ");";
 
+        public static string CREATE_TABLE_MANIFEST = "CREATE TABLE MANIFEST(" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "APPID INTEGER NOT NULL," +
+            "COMMIT_GUID TEXT, " +
+            "COMMITID INTEGER NOT NULL, " +
+            "CONTENT TEXT, " +
+            "AUTHOR_NAME TEXT, " +
+            "AUTHOR_EMAIL, " +
+            "DATE_TEXT TEXT," +
+            "DATE_TICKS REAL " + 
+            ");";
+
+        public static string CREATE_TABLE_MANIFEST_PERMISSION = "CREATE TABLE MANIFEST_PERMISSION(" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "APPID INTEGER NOT NULL," +
+            "COMMIT_GUID TEXT, " +
+            "COMMITID INTEGER NOT NULL, " +
+            "PERMISSION TEXT, " +
+            "AUTHOR_NAME TEXT, " +
+            "AUTHOR_EMAIL, " +
+            "DATE_TEXT TEXT," +
+            "DATE_TICKS REAL " +
+            ");";
+
+        public static string CREATE_TABLE_MANIFEST_SDK = "CREATE TABLE MANIFEST_SDK(" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "APPID INTEGER NOT NULL," +
+            "COMMIT_GUID TEXT, " +
+            "COMMITID INTEGER NOT NULL, " +
+            "MIN_SDK INTEGER, " +
+            "TARGET_SDK INTEGER, " +
+            "AUTHOR_NAME TEXT, " +
+            "AUTHOR_EMAIL, " +
+            "DATE_TEXT TEXT," +
+            "DATE_TICKS REAL " +
+            ");";
+
+
+        public static string INSERT_TABLE_MANIFEST = "INSERT INTO MANIFEST (APPID, COMMIT_GUID, COMMITID, CONTENT, AUTHOR_NAME, AUTHOR_EMAIL, DATE_TEXT, DATE_TICKS) VALUES ({0}, '{1}', {2}, '{3}', '{4}', '{5}', '{6}', {7});";
+
+        public static string INSERT_TABLE_MANIFEST_PERMISSION = "INSERT INTO MANIFEST_PERMISSION (APPID, COMMIT_GUID, COMMITID, PERMISSION, AUTHOR_NAME, AUTHOR_EMAIL, DATE_TEXT, DATE_TICKS) VALUES ({0}, '{1}', {2}, '{3}', '{4}', '{5}', '{6}', {7});";
+
+        public static string INSERT_TABLE_MANIFEST_SDK = "INSERT INTO MANIFEST_SDK (APPID, COMMIT_GUID, COMMITID, MIN_SDK, TARGET_SDK, AUTHOR_NAME, AUTHOR_EMAIL, DATE_TEXT, DATE_TICKS) VALUES ({0}, '{1}', {2}, {3}, {4}, '{5}', '{6}', '{7}', {8});";
 
         public static string INSERT_TABLE_APP = "INSERT INTO APP (NAME, FRIENDLY_NAME, SUMMARY, CATEGORY, WEBSITE, LICENSE, REPO_TYPE, ISSUE_TRACKER, SOURCE) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');";
 
@@ -82,7 +135,26 @@ namespace AndroidCodeAnalyzer
 
         public static string SELECT_APP = "SELECT * FROM APP WHERE NAME='{0}' ";
 
+        public static string SELECT_COMMIT = "SELECT * FROM COMMIT_LOG WHERE APPID={0} AND GUID='{1}' ";
+
         public static string GIT_FDROID = "https://gitlab.com/fdroid/fdroiddata.git";
+
+
+
+
+     /*
+     Query to get the most recent date      
+Select u.APPID, u.DATE_TICKS, u.DATE_TEXT, u.GUID
+From COMMIT_LOG as u
+Inner Join (
+    Select COMMIT_LOG.APPID
+          ,max(COMMIT_LOG.DATE_TICKS) as [DATE_TICKS]
+    From COMMIT_LOG
+    Group By COMMIT_LOG.APPID) As [q]
+On u.APPID = q.APPID
+And u.DATE_TICKS = q.DATE_TICKS
+
+    */
 
     }
 }
