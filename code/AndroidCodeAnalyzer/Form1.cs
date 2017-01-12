@@ -156,14 +156,10 @@ namespace AndroidCodeAnalyzer
 
             foreach (var directory in directories)
             {
-
-                string lastFolderName = Path.GetFileName(directory);
-                long appId = db.GetAppByName(lastFolderName).Id;
-
                 repo = new Repository(directory);
                 commiList = new List<Commit>();
 
-                for (int i = repo.Commits.Count()-1; i >= 0; i--)
+                for (int i = 0; i < repo.Commits.Count(); i++)
                 {
                     commit = new Commit();
                     commit.AuthorEmail = repo.Commits.ElementAt(i).Author.Email;
@@ -178,10 +174,10 @@ namespace AndroidCodeAnalyzer
                         Tree firstCommit = repo.Lookup<Tree>(repo.Commits.ElementAt(i).Tree.Sha);
                         Tree lastCommit = repo.Lookup<Tree>(repo.Commits.ElementAt(0).Tree.Sha);
 
-                        var changes = repo.Diff.Compare<TreeChanges>(lastCommit, firstCommit);
+                        var changes = repo.Diff.Compare<TreeChanges>(firstCommit, lastCommit);
                         foreach (var item in changes)
                         {
-                            if (item.Status != ChangeKind.Deleted)
+                            if (item.Status != ChangeKind.Added)
                             {
                                 commitFile = new CommitFile(item.Path, ChangeKind.Added.ToString());
                                 commit.CommitFiles.Add(commitFile);
@@ -190,20 +186,55 @@ namespace AndroidCodeAnalyzer
                     }
                     else
                     {
-                        var changes = repo.Diff.Compare<TreeChanges>(repo.Commits.ElementAt(i+1).Tree, repo.Commits.ElementAt(i).Tree);
-                        foreach (var item in changes)
+                        var changes =  repo.Diff.Compare<TreeChanges>(repo.Commits.ElementAt(i).Tree, repo.Commits.ElementAt(i + 1).Tree);
+                        foreach(var item in changes)
                         {
                             commitFile = new CommitFile(item.Path, item.Status.ToString());
                             commit.CommitFiles.Add(commitFile);
                         }                        
                     }
 
-                    commiList.Add(commit);
+
                 }
 
-                db.BatchInsertCommits(commiList, appId);                
+
+               
+                
+                //BranchCollection b = repo.Branches;
+                //foreach(var bb in b){
+                //    ICommitLog l = bb.Commits;
+                //    int c = l.Count();
+                //}
+                
             }
         }
 
+        //static void CompareTrees(Repository repo)
+        //{
+        //    using (repo)
+        //    {
+        //        Tree commitTree = repo.Head.Tip.Tree; // Main Tree
+        //        Tree parentCommitTree = repo.Head.Tip.Parents.Single().Tree; // Secondary Tree
+
+        //        var patch = repo.Diff.Compare<Patch>(parentCommitTree, commitTree); // Difference
+
+        //        foreach (var ptc in patch)
+        //        {
+        //            Console.WriteLine(ptc.Status + " -> " + ptc.Path); // Status -> File Path
+        //        }
+        //    }
+        //}
+        //public String[] FilesToMerge(Commit commit)
+        //{
+        //    var fileList = new List<String>();
+        //    foreach (var parent in commit.Parents)
+        //    {
+        //        foreach (TreeEntryChanges change in repo.Diff.Compare<TreeChanges>(parent.Tree, commit.Tree))
+        //        {
+        //            fileList.Add(change.Path);
+        //        }
+        //    }
+        //    return fileList.ToArray();
+        //}
     }
 }
