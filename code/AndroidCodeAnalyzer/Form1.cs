@@ -25,25 +25,18 @@ namespace AndroidCodeAnalyzer
             workingDirectory = "workingDirectory-" + DateTime.Now.Ticks.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SourceFileParser sp = new SourceFileParser(@"\\VBOXSVR\Projects\AndroidCodeAnalyzer\AndroidCodeAnalyzer\files\");
-            FileInfo[] f = sp.Files;
-            f.Count();
-            List<App> apps = sp.ParseFiles();
-            apps.Count();
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Enabled = false;
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
 
-            Thread startProcess = new Thread(StartProcess);
+            Thread startProcess = new Thread(CloneFdroidRepo);
             startProcess.Start();
         }
 
-        private void StartProcess()
+        private void CloneFdroidRepo()
         {
             UpdateStatus("Started - Clone f-Droid Repo");
             CloneOptions options = new CloneOptions();
@@ -67,7 +60,7 @@ namespace AndroidCodeAnalyzer
             db.BatchInsertApps(apps);
             UpdateStatus("Completed - Insert App Records");
 
-            ProcessCompleted();
+            SetMainStatus("Completed - Clone f-droid");
         }
 
 
@@ -85,25 +78,37 @@ namespace AndroidCodeAnalyzer
             }
         }
 
-        private void ProcessCompleted()
+        private void SetMainStatus(string text)
         {
             if (this.button2.InvokeRequired)
             {
-                ProcessCompletedCallback callback = new ProcessCompletedCallback(ProcessCompleted);
-                this.Invoke(callback);
+                ProcessCompletedCallback callback = new ProcessCompletedCallback(SetMainStatus);
+                this.Invoke(callback, new object[] { text });
             }
             else
             {
                 button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;
+                button5.Enabled = true;
+
+                labelStatus.Text = text;
             }
         }
 
         delegate void UpdateStatusCallback(string text);
-        delegate void ProcessCompletedCallback();
+        delegate void ProcessCompletedCallback(string text);
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);           
+            labelStatus.Text = "Started - App Repos Download";
+
+            button2.Enabled = false;
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+
+            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);           
 
             Thread startProcess = new Thread(StartRepoDownload);
             startProcess.Start();
@@ -112,6 +117,7 @@ namespace AndroidCodeAnalyzer
 
         private void StartRepoDownload()
         {
+
             string repoLocation;
             apps = db.GetApps();
             foreach (var app in apps)
@@ -136,11 +142,20 @@ namespace AndroidCodeAnalyzer
                 }
             }
 
+            SetMainStatus("Completed - App Repos Download");
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);
+            labelStatus.Text = "Started - Get Commit History";
+
+            button2.Enabled = false;
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+
+            db = new Database(@"workingDirectory-636197816261826712\database.sqlite", false);
 
             Thread startProcess = new Thread(CommitHistory);
             startProcess.Start();
@@ -148,7 +163,8 @@ namespace AndroidCodeAnalyzer
 
         private void CommitHistory()
         {
-            string repoRootLocation = string.Format(@"C:/workingDirectory-{0}", 636197393254705970);
+
+            string repoRootLocation = string.Format(@"E:/workingDirectory-{0}", 636197816261826712);
             var directories = Directory.GetDirectories(repoRootLocation);
             Repository repo;
             List<Commit> commiList;
@@ -215,25 +231,23 @@ namespace AndroidCodeAnalyzer
                     continue;
                 }
             }
+
+            SetMainStatus("Completed - Get Commit History");
         }
 
         private void AndroidManifestHistory()
         {
-            string repoRootLocation = string.Format(@"C:/workingDirectory-{0}", 636197393254705970);
+
+            string repoRootLocation = string.Format(@"E:/workingDirectory-{0}", 636197816261826712);
             Repository repo;
             List<Manifest> manifestList;
             Manifest manifest;
             
             var directories = Directory.GetDirectories(repoRootLocation);
 
-            int counter = 0;
-
             foreach (var directory in directories)
             {
-                if (counter == 3)
-                    return;
-                counter++;
-
+ 
                 string lastFolderName = Path.GetFileName(directory);
                 var manifestFile = Directory.GetFiles(directory, "AndroidManifest.xml", SearchOption.AllDirectories).FirstOrDefault();
                 long appId = db.GetAppByName(lastFolderName).Id;
@@ -284,6 +298,10 @@ namespace AndroidCodeAnalyzer
 
                         }
                     }
+
+                    db.BatchInsertManifest(manifestList);
+
+                    UpdateStatus(string.Format("Completed - Manifest Histroy for {0}", lastFolderName));
                 }
                 catch (Exception error)
                 {
@@ -292,6 +310,7 @@ namespace AndroidCodeAnalyzer
                 }
             }
 
+            SetMainStatus("Completed - Get Manifest History");
         }
 
         private List<string> XMLExtract(string xml, string node, string attribute)
@@ -316,10 +335,18 @@ namespace AndroidCodeAnalyzer
 
         private void button5_Click(object sender, EventArgs e)
         {
-            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);
+            labelStatus.Text = "Started - Get Maifest History";
+
+            button2.Enabled = false;
+            button3.Enabled = false;
+            button4.Enabled = false;
+            button5.Enabled = false;
+
+            db = new Database(@"workingDirectory-636197816261826712\database.sqlite", false);
 
             Thread startProcess = new Thread(AndroidManifestHistory);
             startProcess.Start();
         }
+
     }
 }

@@ -86,6 +86,64 @@ namespace AndroidCodeAnalyzer
             }
         }
 
+        public void BatchInsertManifest(List<Manifest> manifests)
+        {
+            using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+            {
+                dbConnection.Open();
+                string commandText;
+                using (var transaction = dbConnection.BeginTransaction())
+                {
+                    foreach (var manifest in manifests)
+                    {
+                        commandText = string.Format(Constants.INSERT_TABLE_MANIFEST,
+                            manifest.AppID,
+                            manifest.CommitGUID,
+                            manifest.CommitID,
+                            manifest.Content.Replace("'", "''"),
+                            manifest.AuthorName.Replace("'", "''"),
+                            manifest.AuthorEmail,
+                            manifest.CommitDate.ToString(),
+                            manifest.CommitDate.Ticks);
+                        command.CommandText = commandText;
+                        command.ExecuteNonQuery();
+
+                        commandText = string.Format(Constants.INSERT_TABLE_MANIFEST_SDK,
+                            manifest.AppID,
+                            manifest.CommitGUID,
+                            manifest.CommitID,
+                            manifest.MinSdkVersion == 0 ? "null" : manifest.MinSdkVersion.ToString(),
+                            manifest.TargetSdkVersion == 0 ? "null":manifest.TargetSdkVersion.ToString(),
+                            manifest.AuthorName.Replace("'", "''"),
+                            manifest.AuthorEmail,
+                            manifest.CommitDate.ToString(),
+                            manifest.CommitDate.Ticks);
+                        command.CommandText = commandText;
+                        command.ExecuteNonQuery();
+
+                        foreach(var permission in manifest.Permission)
+                        {
+                            commandText = string.Format(Constants.INSERT_TABLE_MANIFEST_PERMISSION,
+                                manifest.AppID,
+                                manifest.CommitGUID,
+                                manifest.CommitID,
+                                permission,
+                                manifest.AuthorName.Replace("'", "''"),
+                                manifest.AuthorEmail,
+                                manifest.CommitDate.ToString(),
+                                manifest.CommitDate.Ticks);
+                            command.CommandText = commandText;
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+                    transaction.Commit();
+                }
+
+                dbConnection.Close();
+            }
+        }
+
         public void BatchInsertCommits(List<Commit> Commits, long AppID)
         {
             using (SQLiteCommand command = new SQLiteCommand(dbConnection))
@@ -204,37 +262,6 @@ namespace AndroidCodeAnalyzer
                 dbConnection.Close();
             }
 
-        }
-
-        public void BatchInsertManifestData(List<Manifest> ManifestData)
-        {
-            using (SQLiteCommand command = new SQLiteCommand(dbConnection))
-            {
-                dbConnection.Open();
-                string commandText;
-                using (var transaction = dbConnection.BeginTransaction())
-                {
-                    foreach (var manifest in ManifestData)
-                    {
-                        //commandText = string.Format(Constants.INSERT_TABLE_APP,
-                        //    app.Name.Replace("'", "''"),
-                        //    app.FriendlyName.Replace("'", "''"),
-                        //    app.Summary.Replace("'", "''"),
-                        //    app.Category.Replace("'", "''"),
-                        //    app.Website,
-                        //    app.License.Replace("'", "''"),
-                        //    app.RepoType,
-                        //    app.IssueTracker,
-                        //    app.Source);
-                        //command.CommandText = commandText;
-                        command.ExecuteNonQuery();
-                    }
-
-                    transaction.Commit();
-                }
-
-                dbConnection.Close();
-            }
         }
 
         public List<App> GetApps()
