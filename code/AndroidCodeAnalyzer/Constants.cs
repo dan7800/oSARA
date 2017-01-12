@@ -46,10 +46,11 @@ namespace AndroidCodeAnalyzer
             ");";
 
         public static string CREATE_TABLE_COMMIT_LOG_FILE = "CREATE TABLE COMMIT_LOG_FILE(" +
-            "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "PATH TEXT," +
-            "OPERATION TEXT," +
-            "COMMITID INTEGER NOT NULL," +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "PATH TEXT, " +
+            "OPERATION TEXT, " +
+            "COMMIT_GUID TEXT, " +
+            "COMMITID INTEGER NOT NULL, " +
             "APPID INTEGER NOT NULL" +
             ");";
 
@@ -63,9 +64,9 @@ namespace AndroidCodeAnalyzer
 
         public static string INSERT_TABLE_APP = "INSERT INTO APP (NAME, FRIENDLY_NAME, SUMMARY, CATEGORY, WEBSITE, LICENSE, REPO_TYPE, ISSUE_TRACKER, SOURCE) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}');";
 
-        public static string INSERT_TABLE_COMMIT_LOG = "INSERT INTO COMMIT_LOG (GUID, MESSAGE, AUTHOR_NAME, AUTHOR_EMAIL, DATE_TEXT, DATE_TICKS, APPID) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6});";
+        public static string INSERT_TABLE_COMMIT_LOG = "INSERT INTO COMMIT_LOG (GUID, MESSAGE, AUTHOR_NAME, AUTHOR_EMAIL, DATE_TEXT, DATE_TICKS, APPID) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', {5}, {6}); SELECT last_insert_rowid();";
 
-        public static string INSERT_TABLE_COMMIT_LOG_FILE = "INSERT INTO COMMIT_LOG_FILE (PATH, OPERATION, COMMITID, APPID) VALUES ('{0}', '{1}', {2}, {3});";
+        public static string INSERT_TABLE_COMMIT_LOG_FILE = "INSERT INTO COMMIT_LOG_FILE (PATH, OPERATION, COMMIT_GUID, COMMITID, APPID) VALUES ('{0}', '{1}', '{2}', {3}, {4});";
 
         public static string CONNECTION_STRING = "Data Source={0};Version=3;";
 
@@ -78,6 +79,8 @@ namespace AndroidCodeAnalyzer
                 ");";
 
         public static string SELECT_ALL_APP = "SELECT * FROM APP WHERE REPO_TYPE='git' AND SOURCE LIKE 'https://github.com/%' ";
+
+        public static string SELECT_APP = "SELECT * FROM APP WHERE NAME='{0}' ";
 
         public static string GIT_FDROID = "https://gitlab.com/fdroid/fdroiddata.git";
 
