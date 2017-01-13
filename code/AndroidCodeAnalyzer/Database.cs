@@ -150,36 +150,44 @@ namespace AndroidCodeAnalyzer
             {
                 dbConnection.Open();
                 string commandText;
-                using (var transaction = dbConnection.BeginTransaction())
+                try
                 {
-                    foreach (var commit in Commits)
+                    using (var transaction = dbConnection.BeginTransaction())
                     {
-                        commandText = string.Format(Constants.INSERT_TABLE_COMMIT_LOG,
-                            commit.GUID,
-                            commit.Message.Replace("'", "''"),
-                            commit.AuthorName.Replace("'", "''"),
-                            commit.AuthorEmail,
-                            commit.Date.ToString(),
-                            commit.Date.Ticks,
-                            AppID);
-                        command.CommandText = commandText;
-                        //command.ExecuteNonQuery();
-                        object obj =  command.ExecuteScalar();
-
-                        foreach(var file in commit.CommitFiles)
+                        foreach (var commit in Commits)
                         {
-                            commandText = string.Format(Constants.INSERT_TABLE_COMMIT_LOG_FILE,
-                                file.Path,
-                                file.Operation,
+                            commandText = string.Format(Constants.INSERT_TABLE_COMMIT_LOG,
                                 commit.GUID,
-                                (long)obj,
+                                commit.Message.Replace("'", "''"),
+                                commit.AuthorName.Replace("'", "''"),
+                                commit.AuthorEmail,
+                                commit.Date.ToString(),
+                                commit.Date.Ticks,
                                 AppID);
                             command.CommandText = commandText;
-                            command.ExecuteNonQuery();
-                        }
-                    }
+                            //command.ExecuteNonQuery();
+                            object obj = command.ExecuteScalar();
 
-                    transaction.Commit();
+                            foreach (var file in commit.CommitFiles)
+                            {
+                                commandText = string.Format(Constants.INSERT_TABLE_COMMIT_LOG_FILE,
+                                    file.Path.Replace("'", "''"),
+                                    file.Operation,
+                                    commit.GUID,
+                                    (long)obj,
+                                    AppID);
+                                command.CommandText = commandText;
+                                command.ExecuteNonQuery();
+                            }
+                        }
+
+                        transaction.Commit();
+                    }
+                }
+                catch(Exception error)
+                {
+                    dbConnection.Close();
+                    throw error;
                 }
 
                 dbConnection.Close();

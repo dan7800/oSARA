@@ -155,16 +155,17 @@ namespace AndroidCodeAnalyzer
             button4.Enabled = false;
             button5.Enabled = false;
 
-            db = new Database(@"workingDirectory-636197816261826712\database.sqlite", false);
+            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);
 
             Thread startProcess = new Thread(CommitHistory);
-            startProcess.Start();
+            startProcess.Start(false);
         }
 
-        private void CommitHistory()
+        private void CommitHistory(object LogCommitFiles)
         {
 
-            string repoRootLocation = string.Format(@"E:/workingDirectory-{0}", 636197816261826712);
+            bool includeFiles = (bool)LogCommitFiles;
+            string repoRootLocation = string.Format(@"C:/workingDirectory-{0}", 636197393254705970);
             var directories = Directory.GetDirectories(repoRootLocation);
             Repository repo;
             List<Commit> commiList;
@@ -181,44 +182,51 @@ namespace AndroidCodeAnalyzer
                     repo = new Repository(directory);
                     commiList = new List<Commit>();
 
-                    UpdateStatus(string.Format("Started - Commit Histroy for {0} ; Total Commits: {1}", lastFolderName, repo.Commits.Count()));
-
-                    for (int i = repo.Commits.Count() - 1; i >= 0; i--)
+                    int commitCount = repo.Commits.Count();
+                    UpdateStatus(string.Format("Started - Commit Histroy for {0} ; Total Commits: {1}", lastFolderName, commitCount));
+                    int i = repo.Commits.Count() - 1 ;
+                    foreach(var cx in repo.Commits)
+                   // for (int i = commitCount - 1; i >= 0; i--)
                     {
                         commit = new Commit();
-                        commit.AuthorEmail = repo.Commits.ElementAt(i).Author.Email;
-                        commit.AuthorName = repo.Commits.ElementAt(i).Author.Name;
-                        commit.Date = repo.Commits.ElementAt(i).Author.When.LocalDateTime;
-                        commit.Message = repo.Commits.ElementAt(i).Message;
-                        commit.GUID = repo.Commits.ElementAt(i).Sha;
+                        commit.AuthorEmail = cx.Author.Email;
+                        commit.AuthorEmail = cx.Author.Email;
+                        commit.AuthorName = cx.Author.Name;
+                        commit.Date = cx.Author.When.LocalDateTime;
+                        commit.Message = cx.Message;
+                        commit.GUID = cx.Sha;
 
-
-                        if (i == repo.Commits.Count() - 1)
+                        if (includeFiles)
                         {
-                            Tree firstCommit = repo.Lookup<Tree>(repo.Commits.ElementAt(i).Tree.Sha);
-                            Tree lastCommit = repo.Lookup<Tree>(repo.Commits.ElementAt(0).Tree.Sha);
-
-                            var changes = repo.Diff.Compare<TreeChanges>(lastCommit, firstCommit);
-                            foreach (var item in changes)
+                            if (i == commitCount - 1)
                             {
-                                if (item.Status != ChangeKind.Deleted)
+                                Tree firstCommit = repo.Lookup<Tree>(repo.Commits.ElementAt(i).Tree.Sha);
+                                Tree lastCommit = repo.Lookup<Tree>(repo.Commits.ElementAt(0).Tree.Sha);
+
+                                var changes = repo.Diff.Compare<TreeChanges>(lastCommit, firstCommit);
+                                foreach (var item in changes)
                                 {
-                                    commitFile = new CommitFile(item.Path, ChangeKind.Added.ToString());
+                                    if (item.Status != ChangeKind.Deleted)
+                                    {
+                                        commitFile = new CommitFile(item.Path, ChangeKind.Added.ToString());
+                                        commit.CommitFiles.Add(commitFile);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                var changes = repo.Diff.Compare<TreeChanges>(repo.Commits.ElementAt(i + 1).Tree, repo.Commits.ElementAt(i).Tree);
+                                foreach (var item in changes)
+                                {
+                                    commitFile = new CommitFile(item.Path, item.Status.ToString());
                                     commit.CommitFiles.Add(commitFile);
                                 }
                             }
                         }
-                        else
-                        {
-                            var changes = repo.Diff.Compare<TreeChanges>(repo.Commits.ElementAt(i + 1).Tree, repo.Commits.ElementAt(i).Tree);
-                            foreach (var item in changes)
-                            {
-                                commitFile = new CommitFile(item.Path, item.Status.ToString());
-                                commit.CommitFiles.Add(commitFile);
-                            }
-                        }
 
                         commiList.Add(commit);
+
+                        i--;
                     }
 
                     db.BatchInsertCommits(commiList, appId);
@@ -238,7 +246,7 @@ namespace AndroidCodeAnalyzer
         private void AndroidManifestHistory()
         {
 
-            string repoRootLocation = string.Format(@"E:/workingDirectory-{0}", 636197816261826712);
+            string repoRootLocation = string.Format(@"C:/workingDirectory-{0}", 636197393254705970);
             Repository repo;
             List<Manifest> manifestList;
             Manifest manifest;
@@ -266,9 +274,9 @@ namespace AndroidCodeAnalyzer
                         manifestList = new List<Manifest>();
                         repo = new Repository(directory);
                         var manifestFileRelativePath = manifestFile.Substring(repoRootLocation.Length + lastFolderName.Length + 2);
-                        IEnumerable<LogEntry> fileHistory = repo.Commits.QueryBy(manifestFileRelativePath);;
+                        IEnumerable<LogEntry> fileHistory = repo.Commits.QueryBy(manifestFileRelativePath);
                        
-                        foreach (var version in fileHistory)
+                        foreach (LogEntry version in fileHistory)
                         {
                             manifest = new Manifest();
                             manifest.AppID = appId;
@@ -277,7 +285,7 @@ namespace AndroidCodeAnalyzer
                             manifest.CommitDate = version.Commit.Author.When.LocalDateTime;
                             manifest.CommitGUID = version.Commit.Sha;
                             manifest.CommitID = db.GetCommitId(appId, version.Commit.Sha);
-
+                            
                             //var commit = repo.Lookup<LibGit2Sharp.Commit>(version.Commit.Sha); // or any other way to retreive a specific commit
                             var treeEntry = version.Commit[manifestFileRelativePath];
                             if (treeEntry == null)
@@ -342,7 +350,7 @@ namespace AndroidCodeAnalyzer
             button4.Enabled = false;
             button5.Enabled = false;
 
-            db = new Database(@"workingDirectory-636197816261826712\database.sqlite", false);
+            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);
 
             Thread startProcess = new Thread(AndroidManifestHistory);
             startProcess.Start();
