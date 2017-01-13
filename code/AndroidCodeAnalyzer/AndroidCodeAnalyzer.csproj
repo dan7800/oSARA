@@ -68,6 +68,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="AuthorRank.cs" />
+    <Compile Include="ProcessAuthorRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProcessAuthorRating.Designer.cs">
+      <DependentUpon>ProcessAuthorRating.cs</DependentUpon>
+    </Compile>
     <Compile Include="Commit.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Database.cs" />
@@ -79,11 +86,24 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Manifest.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="ProcessPermissions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProcessPermissions.Designer.cs">
+      <DependentUpon>ProcessPermissions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceFileParser.cs" />
+    <EmbeddedResource Include="ProcessAuthorRating.resx">
+      <DependentUpon>ProcessAuthorRating.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProcessPermissions.resx">
+      <DependentUpon>ProcessPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -252,6 +252,38 @@ namespace AndroidCodeAnalyzer
             return id;
         }
 
+        public List<Commit> GetAllCommits()
+        {
+            List<Commit> commitList = new List<Commit>();
+            Commit commit;
+            using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+            {
+                dbConnection.Open();
+                using (var transaction = dbConnection.BeginTransaction())
+                {
+                    command.CommandText = string.Format(Constants.SELECT_ALL_COMMIT);
+                    command.CommandType = System.Data.CommandType.Text;
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        commit = new Commit();
+                        commit.AuthorEmail = reader[Constants.COLUMN_COMMIT_LOG_AUTHOR_EMAIL].ToString();
+                        commit.AuthorName = reader[Constants.COLUMN_COMMIT_LOG_AUTHOR_NAME].ToString();
+                        commit.Date = new DateTime(Convert.ToInt64(reader[Constants.COLUMN_COMMIT_LOG_DATE_TICKS]));
+                        commit.GUID = reader[Constants.COLUMN_COMMIT_LOG_GUID].ToString();
+                        commit.Message = reader[Constants.COLUMN_COMMIT_LOG_MESSAGE].ToString();
+                        commit.AppID = Convert.ToInt64(reader[Constants.COLUMN_COMMIT_LOG_APPID]);
+
+                        commitList.Add(commit);
+                    }
+                }
+
+                dbConnection.Close();
+            }
+
+            return commitList;
+        }
+
         public void UpsertAppDonwload(long appId, DateTime dowloadDate)
         {
             string commandText = string.Format(Constants.UPSERT_TABLE_APP_CLONE, appId, dowloadDate.ToString(), dowloadDate.Ticks);
@@ -308,6 +340,41 @@ namespace AndroidCodeAnalyzer
             }
 
             return apps;
+        }
+
+        public List<Permission> GetPermissions()
+        {
+            List<Permission> permissionList = new List<Permission>();
+
+            using (SQLiteCommand command = new SQLiteCommand(dbConnection))
+            {
+                dbConnection.Open();
+                using (var transaction = dbConnection.BeginTransaction())
+                {
+
+                    command.CommandText = Constants.SELECT_ALL_PERMISSION_HISTORY;
+                    command.CommandType = System.Data.CommandType.Text;
+                    SQLiteDataReader reader = command.ExecuteReader();
+                    Permission permission;
+                    while (reader.Read())
+                    {
+                        permission = new Permission();
+                        permission.AppID = Convert.ToInt64(reader[Constants.COLUMN_MANIFEST_PERMISSION_APPID]);
+                        permission.CommitGUID = reader[Constants.COLUMN_MANIFEST_PERMISSION_COMMIT_GUID].ToString();
+                        permission.CommitID = Convert.ToInt64(reader[Constants.COLUMN_MANIFEST_PERMISSION_COMMITID]);
+                        permission.PermissionName = reader[Constants.COLUMN_MANIFEST_PERMISSION_PERMISSION].ToString();
+                        permission.AuthorName = reader[Constants.COLUMN_MANIFEST_PERMISSION_AUTHOR_NAME].ToString();
+                        permission.AuthorEmail = reader[Constants.COLUMN_MANIFEST_PERMISSION_AUTHOR_EMAIL].ToString();
+                        permission.Date = new DateTime(Convert.ToInt64(reader[Constants.COLUMN_MANIFEST_PERMISSION_DATE_TICKS]));
+
+                        permissionList.Add(permission);
+                    }
+                }
+
+                dbConnection.Close();
+            }
+
+            return permissionList;
         }
     }
 }

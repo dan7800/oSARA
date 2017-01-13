@@ -28,7 +28,14 @@ namespace AndroidCodeAnalyzer
         public static string COLUMN_COMMIT_LOG_DATE_TICKS = "DATE_TICKS";
         public static string COLUMN_COMMIT_LOG_APPID = "APPID";
 
-
+        public static string COLUMN_MANIFEST_PERMISSION_ID = "ID";
+        public static string COLUMN_MANIFEST_PERMISSION_APPID = "APPID";
+        public static string COLUMN_MANIFEST_PERMISSION_COMMIT_GUID = "COMMIT_GUID";
+        public static string COLUMN_MANIFEST_PERMISSION_COMMITID = "COMMITID";
+        public static string COLUMN_MANIFEST_PERMISSION_PERMISSION = "PERMISSION";
+        public static string COLUMN_MANIFEST_PERMISSION_AUTHOR_NAME = "AUTHOR_NAME";
+        public static string COLUMN_MANIFEST_PERMISSION_AUTHOR_EMAIL = "AUTHOR_EMAIL";
+        public static string COLUMN_MANIFEST_PERMISSION_DATE_TICKS = "DATE_TICKS";
 
 
         public static string CREATE_TABLE_APP="CREATE TABLE APP(" +
@@ -137,24 +144,63 @@ namespace AndroidCodeAnalyzer
 
         public static string SELECT_COMMIT = "SELECT * FROM COMMIT_LOG WHERE APPID={0} AND GUID='{1}' ";
 
+        public static string SELECT_ALL_COMMIT = "SELECT * FROM COMMIT_LOG";
+
+        public static string SELECT_ALL_PERMISSION_HISTORY = "SELECT * FROM MANIFEST_PERMISSION";
+
         public static string GIT_FDROID = "https://gitlab.com/fdroid/fdroiddata.git";
 
 
 
 
-     /*
-     Query to get the most recent date      
-Select u.APPID, u.DATE_TICKS, u.DATE_TEXT, u.GUID
-From COMMIT_LOG as u
-Inner Join (
-    Select COMMIT_LOG.APPID
-          ,max(COMMIT_LOG.DATE_TICKS) as [DATE_TICKS]
-    From COMMIT_LOG
-    Group By COMMIT_LOG.APPID) As [q]
-On u.APPID = q.APPID
-And u.DATE_TICKS = q.DATE_TICKS
+        /*
+        Query to get the most recent date      
+   Select u.APPID, u.DATE_TICKS, u.DATE_TEXT, u.GUID
+   From COMMIT_LOG as u
+   Inner Join (
+       Select COMMIT_LOG.APPID
+             ,max(COMMIT_LOG.DATE_TICKS) as [DATE_TICKS]
+       From COMMIT_LOG
+       Group By COMMIT_LOG.APPID) As [q]
+   On u.APPID = q.APPID
+   And u.DATE_TICKS = q.DATE_TICKS
 
-    */
+       */
+
+
+        /*
+
+        SELECT
+  ProcessedPermissions.APPID AS APP_ID,
+  APP.FRIENDLY_NAME AS APP_NAME,
+  ProcessedPermissions.AUTHOR_NAME AS AUTHOR_NAME,
+  ProcessedPermissions.AUTHOR_EMAIL AS AUTHOR_EMAIL,
+  ProcessedAuthorRank.PERCENT_COMMIT AS AUTHOR_PERCENT,
+  ProcessedPermissions.PERMISSION AS PERMISSION,
+  ProcessedPermissions.ACTION AS ACTION,
+  ProcessedPermissions.DATE_TEXT AS COMMIT_DATE_TEXT,
+  ProcessedPermissions.DATE_TICKS AS COMMIT_DATE_TICKS,
+  ProcessedPermissions.COMMIT_GUID AS COMMIT_GUID,
+  COMMIT_LOG.MESSAGE AS COMMIT_MESSAGE
+FROM ProcessedPermissions
+INNER JOIN ProcessedAuthorRank ON (
+    ProcessedAuthorRank.AUTHOR_EMAIL = ProcessedPermissions.AUTHOR_EMAIL AND
+    ProcessedAuthorRank.AUTHOR_NAME = ProcessedPermissions.AUTHOR_NAME AND
+    ProcessedAuthorRank.APPID = ProcessedPermissions.APPID)
+INNER JOIN APP ON (
+    APP.ID = ProcessedPermissions.APPID
+    )
+INNER JOIN COMMIT_LOG ON (
+    COMMIT_LOG.GUID = ProcessedPermissions.COMMIT_GUID AND
+    COMMIT_LOG.APPID = ProcessedPermissions.APPID
+    )
+ORDER BY APP_ID, COMMIT_DATE_TICKS
+
+
+
+
+
+         */
 
     }
 }

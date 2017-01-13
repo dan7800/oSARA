@@ -12,6 +12,7 @@ namespace AndroidCodeAnalyzer
         string message;
         string authorName;
         string authorEmail;
+        long appID;
         DateTime date;
         List<CommitFile> commitFiles;
 
@@ -21,6 +22,7 @@ namespace AndroidCodeAnalyzer
         public string AuthorEmail { get => authorEmail; set => authorEmail = value; }
         public DateTime Date { get => date; set => date = value; }
         internal List<CommitFile> CommitFiles { get => commitFiles; set => commitFiles = value; }
+        public long AppID { get => appID; set => appID = value; }
 
         public Commit()
         {

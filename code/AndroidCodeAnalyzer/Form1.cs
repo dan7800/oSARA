@@ -275,8 +275,8 @@ namespace AndroidCodeAnalyzer
                         repo = new Repository(directory);
                         var manifestFileRelativePath = manifestFile.Substring(repoRootLocation.Length + lastFolderName.Length + 2);
                         IEnumerable<LogEntry> fileHistory = repo.Commits.QueryBy(manifestFileRelativePath);
-                       
-                        foreach (LogEntry version in fileHistory)
+
+                        foreach (var version in fileHistory)
                         {
                             manifest = new Manifest();
                             manifest.AppID = appId;
@@ -285,7 +285,7 @@ namespace AndroidCodeAnalyzer
                             manifest.CommitDate = version.Commit.Author.When.LocalDateTime;
                             manifest.CommitGUID = version.Commit.Sha;
                             manifest.CommitID = db.GetCommitId(appId, version.Commit.Sha);
-                            
+
                             //var commit = repo.Lookup<LibGit2Sharp.Commit>(version.Commit.Sha); // or any other way to retreive a specific commit
                             var treeEntry = version.Commit[manifestFileRelativePath];
                             if (treeEntry == null)
