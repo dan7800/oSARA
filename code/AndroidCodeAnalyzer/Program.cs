@@ -18,7 +18,8 @@ namespace AndroidCodeAnalyzer
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
             //Application.Run(new ProcessPermissions());
-            Application.Run(new ProcessAuthorRating());
+            //Application.Run(new ProcessAuthorRating());
+            Application.Run(new formMain());
         }
     }
 }

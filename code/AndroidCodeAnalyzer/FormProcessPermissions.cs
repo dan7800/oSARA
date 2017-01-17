@@ -12,22 +12,13 @@ using System.Windows.Forms;
 
 namespace AndroidCodeAnalyzer
 {
-    public partial class ProcessPermissions : Form
+    public partial class FormProcessPermissions : Form
     {
-        string workingDirectory;
-        Database db;
+        string dbPath, csvPath, workingDirectory;
 
-        public ProcessPermissions()
+        public FormProcessPermissions()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);
-
-            Thread startProcess = new Thread(ProcessPermissons);
-            startProcess.Start();
         }
 
         private void ProcessPermissons()
@@ -38,6 +29,7 @@ namespace AndroidCodeAnalyzer
             List<ProcessedPermission>  historyList = new List<ProcessedPermission>();
             ProcessedPermission historyItem;
 
+            Database db = new Database(dbPath, false);
             List<Permission> permissionCommits = db.GetPermissions();
             
             //Get unique apps
@@ -137,7 +129,7 @@ namespace AndroidCodeAnalyzer
             }
 
             UpdateStatus("Started - Output results to CSV");
-            using (StreamWriter w = File.AppendText("ProcessedPermissions.csv"))
+            using (StreamWriter w = File.AppendText(string.Format(@"{0}\ProcessedPermissions.csv", workingDirectory)))
             {
                 w.WriteLine("APPID;COMMITID;COMMIT_GUID;DATE_TEXT;DATE_TICKS;PERMISSION;ACTION;AUTHOR_NAME;AUTHOR_EMAIL");
                 foreach (var item in historyList)
@@ -151,24 +143,69 @@ namespace AndroidCodeAnalyzer
 
             UpdateStatus("----------------------------------");
             UpdateStatus("Completed - Processing Permissions");
+            SetMainStatus("Completed - Processing Permissions");
         }
 
 
         private void UpdateStatus(string text)
         {
-            if (this.button1.InvokeRequired)
+            if (this.button2.InvokeRequired)
             {
                 UpdateStatusCallback callback = new UpdateStatusCallback(UpdateStatus);
                 this.Invoke(callback, new object[] { text });
             }
             else
             {
-                //labelStatus.Text = labelStatus.Text + Environment.NewLine + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " " + text;
                 textBoxLog.Text = textBoxLog.Text + Environment.NewLine + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " " + text;
             }
         }
 
-        delegate void UpdateStatusCallback(string text);
+        private void SetMainStatus(string text)
+        {
+            if (this.button2.InvokeRequired)
+            {
+                ProcessCompletedCallback callback = new ProcessCompletedCallback(SetMainStatus);
+                this.Invoke(callback, new object[] { text });
+            }
+            else
+            {
+                button2.Enabled = true;
+                textBoxDBPath.Enabled = true;
+                textBoxCSVPath.Enabled = true;
+                labelStatus.Text = text;
+            }
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dbPath = textBoxDBPath.Text;
+            csvPath = textBoxCSVPath.Text;
+
+            if (!File.Exists(dbPath))
+            {
+                MessageBox.Show("The path for the database file (database.sqlite) is not valid." + Environment.NewLine + "Please enter the valid path.");
+                return;
+            }
+
+            if (!Directory.Exists(csvPath))
+            {
+                MessageBox.Show("The path for the CSV output file is not valid." + Environment.NewLine + "Please enter the valid path.");
+                return;
+            }
+
+            button2.Enabled = false;
+            textBoxDBPath.Enabled = false;
+            textBoxCSVPath.Enabled = false;
+
+            workingDirectory = csvPath;
+
+            labelStatus.Text = "Started - Processing Permissions";
+
+            Thread startProcess = new Thread(ProcessPermissons);
+            startProcess.Start();
+        }
+
+        delegate void UpdateStatusCallback(string text);
+        delegate void ProcessCompletedCallback(string text);
     }
 }

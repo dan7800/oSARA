@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo2.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -69,11 +72,41 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AuthorRank.cs" />
-    <Compile Include="ProcessAuthorRating.cs">
+    <Compile Include="FormCommitHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProcessAuthorRating.Designer.cs">
-      <DependentUpon>ProcessAuthorRating.cs</DependentUpon>
+    <Compile Include="FormCommitHistory.Designer.cs">
+      <DependentUpon>FormCommitHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDownloadFdroid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDownloadFdroid.Designer.cs">
+      <DependentUpon>FormDownloadFdroid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDownloadRepos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDownloadRepos.Designer.cs">
+      <DependentUpon>FormDownloadRepos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormManifestHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormManifestHistory.Designer.cs">
+      <DependentUpon>FormManifestHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProcessAuthorRating.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProcessAuthorRating.Designer.cs">
+      <DependentUpon>FormProcessAuthorRating.cs</DependentUpon>
     </Compile>
     <Compile Include="Commit.cs" />
     <Compile Include="Constants.cs" />
@@ -87,23 +120,38 @@
     </Compile>
     <Compile Include="Manifest.cs" />
     <Compile Include="Permission.cs" />
-    <Compile Include="ProcessPermissions.cs">
+    <Compile Include="FormProcessPermissions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProcessPermissions.Designer.cs">
-      <DependentUpon>ProcessPermissions.cs</DependentUpon>
+    <Compile Include="FormProcessPermissions.Designer.cs">
+      <DependentUpon>FormProcessPermissions.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SourceFileParser.cs" />
-    <EmbeddedResource Include="ProcessAuthorRating.resx">
-      <DependentUpon>ProcessAuthorRating.cs</DependentUpon>
+    <EmbeddedResource Include="FormCommitHistory.resx">
+      <DependentUpon>FormCommitHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDownloadFdroid.resx">
+      <DependentUpon>FormDownloadFdroid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDownloadRepos.resx">
+      <DependentUpon>FormDownloadRepos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormManifestHistory.resx">
+      <DependentUpon>FormManifestHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProcessAuthorRating.resx">
+      <DependentUpon>FormProcessAuthorRating.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProcessPermissions.resx">
-      <DependentUpon>ProcessPermissions.cs</DependentUpon>
+    <EmbeddedResource Include="FormProcessPermissions.resx">
+      <DependentUpon>FormProcessPermissions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,6 +175,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="logo2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

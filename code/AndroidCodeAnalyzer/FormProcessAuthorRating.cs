@@ -12,29 +12,22 @@ using System.Windows.Forms;
 
 namespace AndroidCodeAnalyzer
 {
-    public partial class ProcessAuthorRating : Form
+    public partial class FormProcessAuthorRating : Form
     {
-        string workingDirectory;
-        Database db;
+        string dbPath,csvPath, workingDirectory;
 
-        public ProcessAuthorRating()
+        public FormProcessAuthorRating()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            db = new Database(@"workingDirectory-636197390928077592\database.sqlite", false);
-
-            Thread startProcess = new Thread(ProcessAuthors);
-            startProcess.Start();
-        }
 
         private void ProcessAuthors()
         {
             UpdateStatus("Started - Processing Author");
             UpdateStatus("--------------------------------");
 
+            Database db = new Database(dbPath, false);
             List<Commit> commitList = db.GetAllCommits();
 
             //Get unique apps
@@ -77,7 +70,7 @@ namespace AndroidCodeAnalyzer
             }
 
             UpdateStatus("Started - Output results to CSV");
-            using (StreamWriter w = File.AppendText("ProcessedAuthorRank.csv"))
+            using (StreamWriter w = File.AppendText(string.Format(@"{0}\ProcessedAuthorRank.csv", workingDirectory)))
             {
                 w.WriteLine("APPID;AUTHOR_NAME;AUTHOR_EMAIL;AUTHOR_COMMITS;TOTAL_APP_COMMITS;PERCENT_COMMIT");
                 foreach (var item in authorRankList)
@@ -90,7 +83,8 @@ namespace AndroidCodeAnalyzer
             UpdateStatus("Completed - Output results to CSV");
 
             UpdateStatus("--------------------------------");
-            UpdateStatus("Completed - Processing Author");                    
+            UpdateStatus("Completed - Processing Author");
+            SetMainStatus("Completed - Processing Author Rating");
         }
 
 
@@ -100,18 +94,65 @@ namespace AndroidCodeAnalyzer
 
         private void UpdateStatus(string text)
         {
-            if (this.button1.InvokeRequired)
+            if (this.button2.InvokeRequired)
             {
                 UpdateStatusCallback callback = new UpdateStatusCallback(UpdateStatus);
                 this.Invoke(callback, new object[] { text });
             }
             else
             {
-                //labelStatus.Text = labelStatus.Text + Environment.NewLine + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " " + text;
                 textBoxLog.Text = textBoxLog.Text + Environment.NewLine + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " " + text;
             }
         }
 
+        private void SetMainStatus(string text)
+        {
+            if (this.button2.InvokeRequired)
+            {
+                ProcessCompletedCallback callback = new ProcessCompletedCallback(SetMainStatus);
+                this.Invoke(callback, new object[] { text });
+            }
+            else
+            {
+                button2.Enabled = true;
+                textBoxDBPath.Enabled = true;
+                textBoxCSVPath.Enabled = true;
+                labelStatus.Text = text;
+            }
+        }
+
+
         delegate void UpdateStatusCallback(string text);
+        delegate void ProcessCompletedCallback(string text);
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            dbPath = textBoxDBPath.Text;
+            csvPath = textBoxCSVPath.Text;
+
+            if (!File.Exists(dbPath))
+            {
+                MessageBox.Show("The path for the database file (database.sqlite) is not valid." + Environment.NewLine + "Please enter the valid path.");
+                return;
+            }
+
+            if (!Directory.Exists(csvPath))
+            {
+                MessageBox.Show("The path for the CSV output file is not valid." + Environment.NewLine + "Please enter the valid path.");
+                return;
+            }
+
+            button2.Enabled = false;
+            textBoxDBPath.Enabled = false;
+            textBoxCSVPath.Enabled = false;
+
+            workingDirectory = csvPath;
+
+            labelStatus.Text = "Started - Processing Author Rating";
+
+            Thread startProcess = new Thread(ProcessAuthors);
+            startProcess.Start();
+        }
     }
 }
