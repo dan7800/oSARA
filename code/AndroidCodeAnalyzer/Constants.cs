@@ -197,8 +197,26 @@ INNER JOIN COMMIT_LOG ON (
 ORDER BY APP_ID, COMMIT_DATE_TICKS
 
 
-
-
+-------------------------------------------------
+CREATE VIEW view_Apps_isDangerous AS
+SELECT
+  ProcessedPermissionsAuthors.APP_ID,
+  ProcessedPermissionsAuthors.APP_NAME,
+  ProcessedPermissionsAuthors.AUTHOR_NAME,
+  ProcessedPermissionsAuthors.AUTHOR_EMAIL,
+  ProcessedPermissionsAuthors.AUTHOR_PERCENT,
+  ProcessedPermissionsAuthors.PERMISSION,
+  DangerousPermission.isDangerous,
+  ProcessedPermissionsAuthors.ACTION,
+  ProcessedPermissionsAuthors.COMMIT_DATE_TEXT,
+  ProcessedPermissionsAuthors.COMMIT_DATE_TICKS,
+  ProcessedPermissionsAuthors.COMMIT_GUID,
+  ProcessedPermissionsAuthors.COMMIT_MESSAGE
+FROM ProcessedPermissionsAuthors
+LEFT JOIN DangerousPermission ON (
+    DangerousPermission.PERMISSION = ProcessedPermissionsAuthors.PERMISSION
+    )
+ORDER BY APP_ID, COMMIT_DATE_TICKS
 
          */
 
