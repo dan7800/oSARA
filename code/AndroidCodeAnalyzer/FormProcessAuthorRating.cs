@@ -49,7 +49,7 @@ namespace AndroidCodeAnalyzer
 
                 totalCommits = appCommits.Count();
 
-                var uniqueAuthors = appCommits.Select(x => new { x.AuthorEmail, x.AuthorName }).Distinct();
+                var uniqueAuthors = appCommits.Select(x => new { x.AuthorEmail }).Distinct();
                 foreach(var author in uniqueAuthors)
                 {                   
                     authorCommits = appCommits.Where(x => x.AuthorEmail.Equals(author.AuthorEmail,StringComparison.InvariantCultureIgnoreCase)).Count();
@@ -57,7 +57,7 @@ namespace AndroidCodeAnalyzer
 
                     authorRank = new AuthorRank();
                     authorRank.AuthorEmail = author.AuthorEmail;
-                    authorRank.AuthorName = author.AuthorName;
+                    //authorRank.AuthorName = author.AuthorName;
                     authorRank.Rank = commitRank;
                     authorRank.AuthorCommits = Convert.ToInt32(authorCommits);
                     authorRank.AppCommits = Convert.ToInt32(totalCommits);
@@ -72,11 +72,11 @@ namespace AndroidCodeAnalyzer
             UpdateStatus("Started - Output results to CSV");
             using (StreamWriter w = File.AppendText(string.Format(@"{0}\ProcessedAuthorRank.csv", workingDirectory)))
             {
-                w.WriteLine("APPID;AUTHOR_NAME;AUTHOR_EMAIL;AUTHOR_COMMITS;TOTAL_APP_COMMITS;PERCENT_COMMIT");
+                w.WriteLine("APPID;AUTHOR_EMAIL;AUTHOR_COMMITS;TOTAL_APP_COMMITS;PERCENT_COMMIT");
                 foreach (var item in authorRankList)
                 {
-                    w.WriteLine("{0};{1};{2};{3};{4};{5}",
-                    item.AppID, item.AuthorName, item.AuthorEmail, item.AuthorCommits,item.AppCommits,item.Rank);
+                    w.WriteLine("{0};{1};{2};{3};{4}",
+                    item.AppID, item.AuthorEmail, item.AuthorCommits,item.AppCommits,item.Rank);
                 }
 
             }
