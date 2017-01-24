@@ -31,7 +31,7 @@ It is recommend that the following sequence be followed when running the tool:
 
 ##### Main/Home Screen
 The following is the main/home screen of the tool. From this screen, the user can perform the required download/processing tasks.
-<img src='http://imgur.com/wzGt7xf'/>
+<img src='http://imgur.com/wzGt7xf.png'/>
 
 
 
