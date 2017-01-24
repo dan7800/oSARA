@@ -1,11 +1,11 @@
 ## oSARA
-This tool analyzes the AndroidManifest.xml file of Android code repositories to capture the history of all permission changes.
+This tool analyzes the AndroidManifest.xml file associated with Android code repositories to capture the history of all permission changes.
 
 ### Context
-The motivation for building this tool was to understand the types of users that make permission changes to apps, how frequently the persmissions are added & reverted and when in the apps commit history the changes are made.
+The motivation for building this tool was to understand the types of users that make permission changes to apps, how frequently the persmissions are added & reverted and when in the app's commit history the changes are made.
 
 ### Setup & Running
-The tool was developed as Windows Form Application using Visual Studio 2017. It utilizes <a href='https://f-droid.org/' target='_blank'> F-Droid's </a> collection of open source Android code repositories to perform the analysis on. Presently, the tool targets repositories hosted on GitHub.
+The tool was developed as a Windows Form Application using Visual Studio 2017. It utilizes <a href='https://f-droid.org/' target='_blank'> F-Droid</a>'s  collection of open source Android code repositories to perform the analysis on. Presently, the tool targets repositories hosted on GitHub.
 
 To run the tool, either:
 <ol>
