@@ -30,13 +30,29 @@ It is recommend that the following sequence be followed when running the tool:
 #### Screens
 
 ##### Main/Home Screen
-The following is the main/home screen of the tool. From this screen, the user can perform the required download/processing tasks.<br/>
-<img src='http://imgur.com/wzGt7xf.png'/><br/>
+The following is the main/home screen of the tool. From this screen, the user can perform the required download/processing tasks.
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/wzGt7xf.png'/>
+		</td>
+	</tr>
+</table>
+
 
 ##### Download F-Droid Repository
-The following screen is utilized to download the F-Droid repository. The download location needs to be procreated and provided prior to starting the process. The database will also be created in this location.<br/>
-<img src='http://imgur.com/BMaYo30.png'/><br/>
-<img src='http://imgur.com/wEJxQeA.png' width='70%' height='70%'/><br/>
+The following screen is utilized to download the F-Droid repository. The download location needs to be procreated and provided prior to starting the process. The database will also be created in this location.
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/BMaYo30.png'/>
+		</td>
+		<td>
+			<img src='http://imgur.com/wEJxQeA.png'/>
+		</td>
+	</tr>
+</table>
+
 
 
 
