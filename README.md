@@ -17,14 +17,22 @@ To run the tool, either:
 	</li>
 </ol>
 
-It is recommend that the following sequence be followed:
+It is recommend that the following sequence be followed when running the tool:
 <ol>
 	<li> Download F-Droid Repository </li>
 	<li> Download Android Projects </li>
 	<li> Get Project Commit History </li>
 	<li> Get Manifest History </li>
-	<li> Process Author Permissions </li>
+	<li> Process Author Permissions </li>s
 	<li> Project Permissions </li>
 </ol>
 
 #### Screens
+
+##### Main/Home Screen
+The following is the main/home screen of the tool. From this screen, the user can perform the required download/processing tasks.
+<img src='http://imgur.com/wzGt7xf'/>
+
+
+
+
