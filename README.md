@@ -6,3 +6,13 @@ The motivation for building this tool was to understand the types of users that 
 
 ### Setup & Running
 The tool was developed as Windows Form Application using Visual Studio 2017. It utilizes <href src='https://f-droid.org/'> F-Droid's </a> collection of open source Android code repositories to perform the analysis on. Presently, the tool targets repositories hosted on GitHub.
+
+To run the tool, either:
+<ol>
+	<li>
+		clone/download the GitHub repository. Open the solution in Visual Studio and build the project
+	</li>
+	<li>
+		extract the files from the executable.zip archive and run 'AndroidCodeAnalyzer.exe'
+	</li>
+</ol>
