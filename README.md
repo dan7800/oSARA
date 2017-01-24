@@ -19,8 +19,8 @@ To run the tool, either:
 
 It is recommend that the following sequence be followed when running the tool:
 <ol>
-	<li> Download F-Droid Repository </li>
-	<li> Download Android Projects </li>
+	<li> <a href='#mainhome-screen'>Download F-Droid Repository</a></li>
+	<li> <a href='#download-f-droid-repository'>Download Android Projects</a></li>
 	<li> Get Project Commit History </li>
 	<li> Get Manifest History </li>
 	<li> Process Author Permissions </li>s
