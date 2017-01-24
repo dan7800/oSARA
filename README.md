@@ -16,3 +16,15 @@ To run the tool, either:
 		extract the files from the executable.zip archive and run 'AndroidCodeAnalyzer.exe'
 	</li>
 </ol>
+
+It is recommend that the following sequence be followed:
+<ol>
+	<li> Download F-Droid Repository </li>
+	<li> Download Android Projects </li>
+	<li> Get Project Commit History </li>
+	<li> Get Manifest History </li>
+	<li> Process Author Permissions </li>
+	<li> Project Permissions </li>
+</ol>
+
+#### Screens
