@@ -23,7 +23,7 @@ It is recommend that the following sequence be followed when running the tool:
 	<li> <a href='#download-f-droid-repository'>Download Android Projects</a></li>
 	<li> Get Project Commit History </li>
 	<li> Get Manifest History </li>
-	<li> Process Author Permissions </li>s
+	<li> Process Author Permissions </li>
 	<li> Project Permissions </li>
 </ol>
 
@@ -39,7 +39,6 @@ The following is the main/home screen of the tool. From this screen, the user ca
 	</tr>
 </table>
 
-
 ##### Download F-Droid Repository
 The following screen is utilized to download the F-Droid repository. The download location needs to be procreated and provided prior to starting the process. The database will also be created in this location.
 <table>
@@ -49,6 +48,67 @@ The following screen is utilized to download the F-Droid repository. The downloa
 		</td>
 		<td>
 			<img src='http://imgur.com/wEJxQeA.png'/>
+		</td>
+	</tr>
+</table>
+
+##### Download Android Project Repositories
+The following screen is utilized to download the Android project repositories. The download location needs to be procreated and provided prior to starting the process. Database location should point to the 'database.sqlite' file created in the previous step.
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/kpw4qBr.png'/>
+		</td>
+		<td>
+			<img src='http://imgur.com/snmheZU.png'/>
+		</td>
+	</tr>
+</table>
+
+##### Get Android Project Commit History Log
+The following screen is utilized to download the commit history for the Android projects. The database location should point to the 'database.sqlite' file and the download location should point to same location entered in the previous step.
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/iKHTQWd.png'/>
+		</td>
+	</tr>
+</table>
+
+##### Get Manifest History
+The following screen is utilized to download manifest file history of the Android project. The database location should point to the 'database.sqlite' file and the download location should point to same location entered in the previous step.
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/CTr6Jny.png'/>
+		</td>
+	</tr>
+</table>
+
+##### Process Author Rating
+The following screen is utilized to calculate the author rating (i.e. Developer Commit Ratio). The tool outputs the data into a CSV file.
+The database location should point to the 'database.sqlite' file. The CVS output location should be created prior to running the tool (delete the csv file if already exists in the location).
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/8rc1w3w.png'/>
+		</td>
+		<td>
+			<img src='http://imgur.com/zqTSUDP.png'/>
+		</td>
+	</tr>
+</table>
+
+##### Process Permissions
+The following screen is utilized to provide a Add/Remove history of the permissions associated with an app. The tool outputs the data into a CSV file.
+The database location should point to the 'database.sqlite' file. The CVS output location should be created prior to running the tool (delete the csv file if already exists in the location).
+<table>
+	<tr>
+		<td>
+			<img src='http://imgur.com/Ln3BMpV.png'/>
+		</td>
+		<td>
+			<img src='http://imgur.com/ZD7UFRl.png'/>
 		</td>
 	</tr>
 </table>
