@@ -1,0 +1,5 @@
+### Get Repo list of >= API 23
+	select distinct(ms.AppID), app. source, target_sdk
+	from manifest_sdk ms
+	inner join app on ms.appID = app.ID
+	where target_sdk >=23
