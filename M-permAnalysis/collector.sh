@@ -72,43 +72,34 @@ function getReleases {
 
 
 
-Run="False"
+	Run="False"
 
 	for i in $(ls -d $ghRepos/*); do 
 
 		dirname=${i%%/}; 
-echo "************" $dirname
-
-
-
+	echo "************" $dirname
 
 	# Get all releases for app
 
 	appName=${dirname/$ghRepos/} 
 
-
-pwd
-	echo $dirname
-
-
-if [ "$Run" == "True" ] # start of a dirty hack
-		then
-echo "quit"
 	pwd
-	cd ../../$dirname
-#exit
-else
-	cd $dirname
+
+
+	if [ "$Run" == "True" ] # start of a dirty hack
+		then
+		cd ../../$dirname
+	#exit
+	else
+		cd $dirname
 
 	fi
 
 
 
-Run="True"
+	Run="True"
 
 	
-
-
 		# Loop through all of the created tags (try getting a count)
 		COUNTER=0
 		for tag in `git tag`; do
