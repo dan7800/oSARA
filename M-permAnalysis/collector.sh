@@ -14,9 +14,10 @@
 clear;
 
 ### Location of Input file	
-#	ghLinks=links.txt
-	ghLinks=links_sm.txt
+	ghLinks=links.txt
+#	ghLinks=links_sm.txt
 #	ghLinks=links_1.txt
+
 
 
 ### CollectedRepos
@@ -92,6 +93,50 @@ function getReleases {
 			git checkout $tag
 			git --work-tree=$outputLoc checkout HEAD -- .
 		 	let COUNTER=COUNTER+1 # Determine how many versions were found
+
+
+		echo "Check release"
+
+		 	#### Check to see if the manifest is 
+
+
+		 	# Find the manifest file
+			loc=`find $outputLoc -name "AndroidManifest.xml";`
+			#echo $loc
+
+			versionInfo=`grep "android:targetSdkVersion=" $loc` 
+			### Replace extra chars
+			versionInfo=${versionInfo/android:targetSdkVersion=/} 
+			versionInfo=${versionInfo/\"/} 
+			versionInfo=${versionInfo/\"/} 
+			versionInfo=${versionInfo/\/>/} 
+
+			echo $versionInfo
+
+			if [ "$versionInfo" -lt 23 ] 
+			then
+				echo "less"
+			else
+				echo "greater"
+			fi
+
+			#android:targetSdkVersion="19" />
+
+		 	# Check it's API version
+
+
+		 	# Delete folder if not appropriate size
+
+
+
+
+
+
+		exit
+
+
+
+
 		done
 
 
@@ -105,10 +150,10 @@ function getReleases {
 			cp -r .  ../../$versions/$appName/SingleVersion # Copy the only version to the primary directory
 
 		fi
-
-		exit
 	done
 
+
+# check to make sure it is api >= 23 delete ones which are not
 
 #	cd ..
 
