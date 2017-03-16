@@ -79,88 +79,31 @@ function getReleases {
 
 		appName=${dirname/$ghRepos/} 
 		cd $dirname
-		#ls
-		# Will show all tags
-		#git show-ref --tags -d
-
-#git tag
-#git show
-#git fetch --tags
-#git fetch tag
-#pwd
 
 
+		# Loop through all of the created tags (try getting a count)
+		COUNTER=0
+		for tag in `git tag`; do
 
-		#git show-ref --tags
+		  ## Make a folder for each tag
+		  	outputLoc=../../$versions/$appName/$tag
+		  	mkdir -p $outputLoc
 
-#git checkout scrumchatter-1.6.2
-#git checkout tags/<tag_name>
-
-
-
-#git checkout tags/scrumchatter-1.6.2
-
-#git checkout tags/scrumchatter-1.6.2 -f --prefix=/version
+			git checkout $tag
+			git --work-tree=$outputLoc checkout HEAD -- .
+		 	let COUNTER=COUNTER+1 # Determine how many versions were found
+		done
 
 
-#git --work-tree=tags/scrumchatter-1.6.2 checkout HEAD -- version
+		## Make sure the versions being collected are actually different
+		## Check to make sure each of these versions can be ran  by M-Perm
 
 
 
 
-#mkdir -p ../../$versions/$dirname ## Create the primary output location
+		echo $COUNTER
 
-
-
-#git --work-tree=scrumchatter-1.6.2  checkout master
-
-
-
-
-
-
-# Loop through all of the created tags (try getting a count)
-COUNTER=0
-for tag in `git tag`; do
-
-  ## Make a folder for each tag
-  	outputLoc=../../$versions/$appName/$tag
-  	mkdir -p $outputLoc
-
-echo $tag
-
-
-
- 	 ## Output the file there
-
-#	git --work-tree=versions checkout tags/$tag -- .
-#	git checkout-index -a -f --prefix=$outputLoc/
-
-	git checkout $tag
-git --work-tree=$outputLoc checkout HEAD -- .
-
-
-
- let COUNTER=COUNTER+1 
-
-
-done
-
-
-
-
-## Make sure the versions being collected are actually different
-## Check to make sure each of these versions can be ran  by M-Perm
-
-
-
-echo $COUNTER
-
-# If the count is 0 (no tags) then output the current version of the project to the directory
-
-
-
-#git tag
+		# If the count is 0 (no tags) then output the current version of the project to the directory
 
 
 
