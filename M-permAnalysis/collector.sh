@@ -23,11 +23,15 @@ clear;
 	ghRepos=Collectedrepos
 
 
+### Location of all versions
+	versions=versions
+
 
 
 ### Build the necessary folders/structure
 
 	mkdir -p $ghRepos
+	mkdir -p $versions
 
 
 
@@ -104,8 +108,44 @@ function getReleases {
 #git --work-tree=tags/scrumchatter-1.6.2 checkout HEAD -- version
 
 
+
+
+#mkdir -p ../../$versions/$dirname ## Create the primary output location
+
+
+
 #git tag ## Returns list of existing tags
-git --work-tree=version checkout tags/scrumchatter-1.6.0 -- .
+#git --work-tree=versions checkout tags/scrumchatter-1.6.0 -- .
+
+
+
+# Loop through all of the created tags (try getting a count)
+
+echo $dirname
+
+exit
+
+
+for tag in `git tag`; do
+  echo "Tag is" $tag
+
+  ## Make a folder for each tag
+  outputLoc=../../$versions/$dirname/$tag
+  mkdir -p $outputLoc
+
+
+  ## Output the file there
+
+
+
+done
+
+
+
+#git tag
+
+
+
 
 		exit
 	done
