@@ -71,15 +71,42 @@ function getReleases {
 #	done
 
 
+
+Run="False"
+
 	for i in $(ls -d $ghRepos/*); do 
 
 		dirname=${i%%/}; 
+echo "************" $dirname
 
 
-		# Get all releases for app
 
-		appName=${dirname/$ghRepos/} 
-		cd $dirname
+
+	# Get all releases for app
+
+	appName=${dirname/$ghRepos/} 
+
+
+pwd
+	echo $dirname
+
+
+if [ "$Run" == "True" ] # start of a dirty hack
+		then
+echo "quit"
+	pwd
+	cd ../../$dirname
+#exit
+else
+	cd $dirname
+
+	fi
+
+
+
+Run="True"
+
+	
 
 
 		# Loop through all of the created tags (try getting a count)
@@ -114,7 +141,7 @@ function getReleases {
 			then
 				# Not the correct API version, so delete the folder
 				echo "Delete file"
-#				rm -r $outputLoc
+				rm -r $outputLoc
 			fi
 
 			#android:targetSdkVersion="19" />
@@ -171,7 +198,6 @@ function getReleases {
 
 #STR="Hello World!"
 #echo $STR    
-
 
 
 
