@@ -94,9 +94,6 @@ function getReleases {
 			git --work-tree=$outputLoc checkout HEAD -- .
 		 	let COUNTER=COUNTER+1 # Determine how many versions were found
 
-
-		echo "Check release"
-
 		 	#### Check to see if the manifest is 
 
 
@@ -115,9 +112,9 @@ function getReleases {
 
 			if [ "$versionInfo" -lt 23 ] 
 			then
-				echo "less"
-			else
-				echo "greater"
+				# Not the correct API version, so delete the folder
+				echo "Delete file"
+#				rm -r $outputLoc
 			fi
 
 			#android:targetSdkVersion="19" />
@@ -132,7 +129,7 @@ function getReleases {
 
 
 
-		exit
+#		exit
 
 
 
