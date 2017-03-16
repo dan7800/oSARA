@@ -83,16 +83,16 @@ function getReleases {
 
 		# Loop through all of the created tags (try getting a count)
 		COUNTER=0
-		# for tag in `git tag`; do
+		for tag in `git tag`; do
 
-		#   ## Make a folder for each tag
-		#   	outputLoc=../../$versions/$appName/$tag
-		#   	mkdir -p $outputLoc
+		  ## Make a folder for each tag
+		  	outputLoc=../../$versions/$appName/$tag
+		  	mkdir -p $outputLoc
 
-		# 	git checkout $tag
-		# 	git --work-tree=$outputLoc checkout HEAD -- .
-		#  	let COUNTER=COUNTER+1 # Determine how many versions were found
-		# done
+			git checkout $tag
+			git --work-tree=$outputLoc checkout HEAD -- .
+		 	let COUNTER=COUNTER+1 # Determine how many versions were found
+		done
 
 
 		# If the count is 0 (no tags) then output the current version of the project to the directory
