@@ -10,14 +10,12 @@
 #	5) Determine who added the permissions-based problems
 
 
-
 clear;
 
 ### Location of Input file	
 	ghLinks=links.txt
 #	ghLinks=links_sm.txt
 #	ghLinks=links_1.txt
-
 
 
 ### CollectedRepos
@@ -28,13 +26,10 @@ clear;
 	versions=versions
 
 
-
 ### Build the necessary folders/structure
 
 	mkdir -p $ghRepos
 	mkdir -p $versions
-
-
 
 
 # Function: Collect Repos
@@ -83,7 +78,7 @@ function getReleases {
 		fi
 
 
-	Run="True" # The script has already been run, so this will influence what directory is encountered
+		Run="True" # The script has already been run, so this will influence what directory is encountered
 
 	
 		# Loop through all of the created tags (try getting a count)
@@ -103,7 +98,6 @@ function getReleases {
 
 		 	# Find the manifest file
 			loc=`find $outputLoc -name "AndroidManifest.xml";`
-			#echo $loc
 
 			versionInfo=`grep "android:targetSdkVersion=" $loc` 
 			### Replace extra chars
@@ -121,23 +115,6 @@ function getReleases {
 				rm -r $outputLoc
 			fi
 
-			#android:targetSdkVersion="19" />
-
-		 	# Check it's API version
-
-
-		 	# Delete folder if not appropriate size
-
-
-
-
-
-
-#		exit
-
-
-
-
 		done
 
 
@@ -154,32 +131,14 @@ function getReleases {
 	done
 
 
-# check to make sure it is api >= 23 delete ones which are not
-
-#	cd ..
-
-
 }
 
 
 
+#	collectRepos  ## Gather all of the repositories
+	getReleases	  ## Get all of the releases from the collected repos
+ 
 
-# Function: Get Versions
-
-
-#	collectRepos
-	getReleases
-
-
-
-
-#STR="Hello World!"
-#echo $STR    
-
-
-
-
-
-
-
+## Todo:
+#	Check to make sure an appropriate manifest file was found prior to deleting the versions
 
