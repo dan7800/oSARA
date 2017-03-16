@@ -117,41 +117,40 @@ function getReleases {
 
 
 
-#####
 
-git checkout-index -a -f --prefix=../../versions/
-
-#####
-
-
-#git tag ## Returns list of existing tags
-git --work-tree=versions checkout tags/scrumchatter-1.6.2 -- .
-
-
-
-
-
-exit
 
 # Loop through all of the created tags (try getting a count)
 COUNTER=0
 for tag in `git tag`; do
-  echo "Tag is" $tag
 
   ## Make a folder for each tag
-  outputLoc=../../$versions/$appName/$tag
-  mkdir -p $outputLoc
+  	outputLoc=../../$versions/$appName/$tag
+  	mkdir -p $outputLoc
+
+echo $tag
 
 
-  ## Output the file there
+
+ 	 ## Output the file there
+
+#	git --work-tree=versions checkout tags/$tag -- .
+#	git checkout-index -a -f --prefix=$outputLoc/
+
+	git checkout $tag
+git --work-tree=$outputLoc checkout HEAD -- .
+
+
 
  let COUNTER=COUNTER+1 
+
 
 done
 
 
 
 
+## Make sure the versions being collected are actually different
+## Check to make sure each of these versions can be ran  by M-Perm
 
 
 
