@@ -77,11 +77,9 @@ function getReleases {
 
 		# Get all releases for app
 
-
-		echo $dirname
+		appName=${dirname/$ghRepos/} 
 		cd $dirname
 		#ls
-
 		# Will show all tags
 		#git show-ref --tags -d
 
@@ -114,31 +112,52 @@ function getReleases {
 
 
 
+#git --work-tree=scrumchatter-1.6.2  checkout master
+
+
+
+
+#####
+
+git checkout-index -a -f --prefix=../../versions/
+
+#####
+
+
 #git tag ## Returns list of existing tags
-#git --work-tree=versions checkout tags/scrumchatter-1.6.0 -- .
+git --work-tree=versions checkout tags/scrumchatter-1.6.2 -- .
 
 
 
-# Loop through all of the created tags (try getting a count)
 
-echo $dirname
 
 exit
 
-
+# Loop through all of the created tags (try getting a count)
+COUNTER=0
 for tag in `git tag`; do
   echo "Tag is" $tag
 
   ## Make a folder for each tag
-  outputLoc=../../$versions/$dirname/$tag
+  outputLoc=../../$versions/$appName/$tag
   mkdir -p $outputLoc
 
 
   ## Output the file there
 
-
+ let COUNTER=COUNTER+1 
 
 done
+
+
+
+
+
+
+
+echo $COUNTER
+
+# If the count is 0 (no tags) then output the current version of the project to the directory
 
 
 
