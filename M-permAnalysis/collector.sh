@@ -83,30 +83,28 @@ function getReleases {
 
 		# Loop through all of the created tags (try getting a count)
 		COUNTER=0
-		for tag in `git tag`; do
+		# for tag in `git tag`; do
 
-		  ## Make a folder for each tag
-		  	outputLoc=../../$versions/$appName/$tag
-		  	mkdir -p $outputLoc
+		#   ## Make a folder for each tag
+		#   	outputLoc=../../$versions/$appName/$tag
+		#   	mkdir -p $outputLoc
 
-			git checkout $tag
-			git --work-tree=$outputLoc checkout HEAD -- .
-		 	let COUNTER=COUNTER+1 # Determine how many versions were found
-		done
+		# 	git checkout $tag
+		# 	git --work-tree=$outputLoc checkout HEAD -- .
+		#  	let COUNTER=COUNTER+1 # Determine how many versions were found
+		# done
 
-
-		## Make sure the versions being collected are actually different
-		## Check to make sure each of these versions can be ran  by M-Perm
-
-
-
-
-		echo $COUNTER
 
 		# If the count is 0 (no tags) then output the current version of the project to the directory
+		if [ "$COUNTER" -eq 0 ] 
+		then
+			## Since no versions exist, merely copy over the file contents of the entire project
+		pwd
+			echo "No versions found"	
+			mkdir -p ../../$versions/$appName/SingleVersion
+			cp -r .  ../../$versions/$appName/SingleVersion # Copy the only version to the primary directory
 
-
-
+		fi
 
 		exit
 	done
