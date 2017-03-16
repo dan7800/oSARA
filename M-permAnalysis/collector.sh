@@ -64,40 +64,26 @@ function getReleases {
 # If no releases, just get the latest version
 
 
-# Loop through all of the output files
-#	cd $ghRepos
-#	for d in $ghRepos; do
-#	    echo "$d"
-#	done
-
-
-
+###	A dirty hack. I left this in so that it would move up a directory if it was already encountered
 	Run="False"
 
 	for i in $(ls -d $ghRepos/*); do 
 
 		dirname=${i%%/}; 
-	echo "************" $dirname
-
-	# Get all releases for app
-
-	appName=${dirname/$ghRepos/} 
-
-	pwd
+	
+		appName=${dirname/$ghRepos/} 
 
 
-	if [ "$Run" == "True" ] # start of a dirty hack
-		then
-		cd ../../$dirname
-	#exit
-	else
-		cd $dirname
-
-	fi
-
+		if [ "$Run" == "True" ] # start of a dirty hack
+			then
+				cd ../../$dirname
+				#exit
+		else
+			cd $dirname
+		fi
 
 
-	Run="True"
+	Run="True" # The script has already been run, so this will influence what directory is encountered
 
 	
 		# Loop through all of the created tags (try getting a count)
