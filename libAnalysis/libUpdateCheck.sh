@@ -13,13 +13,12 @@ clear;
 ### Remove all numbers from String
 ### Eliminate all version info
 function cleanString {
-	strVal=$1
-	IFS=0123456789
-	set -f # Disable glob
 
+	strVal=$1
 	strVal=${strVal//./}  # Remove .
 	strVal=${strVal//:/}  # Remove :
-
+	strVal=${strVal//@/}  # Remove @
+	strVal=${strVal//[0-9]/}
 
 	echo $strVal
 }
@@ -34,14 +33,30 @@ function updateTypeStringMatch {
 	str_update=`cleanString $2`
 
 
+	#echo $str_orig
+	#echo $str_update
+
+
+#	str_orig=$1
+#	str_orig=${str_orig//./}  # Remove .
+#	str_orig=${str_orig//:/}  # Remove :
+#	str_orig=${str_orig//@/}  # Remove @
+#	str_orig=${str_orig//[0-9]/}
+
+#	str_update=$2
+#	str_update=${str_update//./}  # Remove .
+#	str_update=${str_update//:/}  # Remove :
+#	str_update=${str_update//@/}  # Remove @
+#	str_update=${str_update//[0-9]/}
+
+
+
 	if [ $str_orig == $str_update ]
 		then
 		echo "update"  # Same
 	else
 		echo "new" # Diff
 	fi
-
-
 
 }
 
@@ -77,10 +92,19 @@ function updateTypeStringMatch {
 
 
 
+
+#cleanString "net.i2p.android:client:0.7"
+
+
 ## Test the String matching function
 
 
 updateTypeStringMatch "com.anthonycr.grant:permissions:1.0" "com.anthonycr.grant:permissions:1.1.2"
+updateTypeStringMatch "com.google.dagger:dagger:2.0.1" "com.google.dagger:dagger:2.0.1"
+updateTypeStringMatch "net.i2p.android:client:0.6@aar" "net.i2p.android:client:0.7" ## will cause problems
+
+updateTypeStringMatch "org.jsoup:jsoup:1.9.1" "org.jsoup:jsoup:1.9.2"
+updateTypeStringMatch "com.squareup:otto:1.3.8" "libs/jsoup-1.8.1.jar"
 
 
 ## Remove all numbers
