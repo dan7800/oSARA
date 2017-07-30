@@ -122,7 +122,7 @@ function examineRow {
 	dcl_id=$1
 
 	# might need to check to see if this is a 0 count for error checking
-	results="$(sqlite3 $db 'select dcl_id, action, dependencies, commit from view_processedLibrarysauthors where dcl_id='$1)"
+	results="$(sqlite3 $db 'select dcl_id, action, dependencies, [commit] from view_processedLibrarysauthors where dcl_id='$1)"
 
 	set -- "$results" 
 	IFS="|"; declare -a Array=($*) 
@@ -145,11 +145,35 @@ function examineRow {
 		### check to see if any of the dependencies in the current set of commits is a simlar value
 		### Get a list of all depencies in the list of current commits
 
+		sql="select dependencies from view_processedLibrarysauthors where [commit]='$commit_guid'"
+		results="$(sqlite3 $db $sql)"
+		
+		## Loop through the 
+		match=0
+
+
+echo $dep_current
+
+### --> CHeck to see if this matches anything below
+
+exit
+
+cnt=${#results[@]}
+for (( i=0 ; i<cnt ; i++ ))
+do
+    echo ${results[$i]}
 
 
 
+ #  fieldA=${results[0]};
+  #  fieldB=${results[1]};
+  #  fieldC=${results[2]};
+  #  echo $fieldA
+done
 
 
+
+		# if match=1 then status = update
 	fi
 
 
