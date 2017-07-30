@@ -14,7 +14,7 @@ clear;
 
 
 
-results="$(sqlite3 $db 'select dcl_id, action, dependencies from view_processedLibrarysauthors limit 5')"
+#results="$(sqlite3 $db 'select dcl_id, action, dependencies from view_processedLibrarysauthors limit 5')"
 
 #for rows in "${results[@]}"
 #do
@@ -39,7 +39,7 @@ results="$(sqlite3 $db 'select dcl_id, action, dependencies from view_processedL
   #  fieldC=${results[2]};
   #  echo $fieldA
 #done
-echo ${results[0]}
+#echo ${results[0]}
 
 #while read a b c
 #do
@@ -57,9 +57,6 @@ echo ${results[0]}
 
 #echo "dan"
 
-
-
-exit
 
 
 ### Remove all numbers from String
@@ -124,22 +121,35 @@ function updateTypeStringMatch {
 function examineRow {
 	dcl_id=$1
 
+	# might need to check to see if this is a 0 count for error checking
+	results="$(sqlite3 $db 'select dcl_id, action, dependencies, commit from view_processedLibrarysauthors where dcl_id='$1)"
 
-#	echo $dcl_id
+	set -- "$results" 
+	IFS="|"; declare -a Array=($*) 
 
-	action=`sqlite3 $db  "SELECT action FROM view_processedLibrarysauthors WHERE dcl_id='$dcl_id';"`
-	echo $action
+	## Assign to variables in case the order changes
+	dcl_id="${Array[0]}"
+	action="${Array[1]}"
+	dep_current="${Array[2]}" 
+	commit_guid="${Array[3]}" 
 
-#	if [ $action eq "added" ]
+	#echo $dcl_id
+	#echo $action
+
 	if [ "$action" == "added" ]
 	then
 		echo "check added"  # Same
 	else
-
-
-
-
 		echo "check removed" # Diff
+
+		### check to see if any of the dependencies in the current set of commits is a simlar value
+		### Get a list of all depencies in the list of current commits
+
+
+
+
+
+
 	fi
 
 
