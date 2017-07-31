@@ -152,24 +152,46 @@ function examineRow {
 		match=0
 
 
-echo $dep_current
+
+		echo $results
+echo ${#results[@]}
+
+
+
+echo "D"
+
+
+
+
+
+
+#echo $dep_current
 
 ### --> CHeck to see if this matches anything below
 
-exit
+#exit
 
-cnt=${#results[@]}
-for (( i=0 ; i<cnt ; i++ ))
-do
-    echo ${results[$i]}
+#cnt=${#results[@]}
+#echo $cnt
+#for (( i=0 ; i<cnt ; i++ ))
+#do
+#   echo ${results[$i]}
 
+#echo "Dan"
+
+#	updateTypeStringMatch ${results[$i]} $dep_current
+
+#	if [ "$action" == "added" ]
+#	then
+#		match=1
+#	fi
 
 
  #  fieldA=${results[0]};
   #  fieldB=${results[1]};
   #  fieldC=${results[2]};
   #  echo $fieldA
-done
+#done
 
 
 
