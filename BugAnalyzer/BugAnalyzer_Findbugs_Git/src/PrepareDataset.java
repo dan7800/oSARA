@@ -1,4 +1,3 @@
-
 public class PrepareDataset {
 	String s;
 	Process process;
@@ -24,5 +23,5 @@ public void extractTar(String tar_file,String directory) {
 	}catch(Exception e) {
 		System.out.print(e);
 	}
-}
+	}
 }

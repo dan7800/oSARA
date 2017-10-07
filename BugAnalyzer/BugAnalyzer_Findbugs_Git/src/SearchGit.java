@@ -2,15 +2,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+public class SearchGit {
 
-public class SearchXML {
-
-
-	
   private String fileNameToSearch;
+  private String fileEndsWith;
   private List<String> result = new ArrayList<String>();
-
-  XML2DB xml2db;
   public String getFileNameToSearch() {
 	return fileNameToSearch;
   }
@@ -23,9 +19,8 @@ public class SearchXML {
 	return result;
   }
 
-  public void search(String dataset_path) throws IOException {
-	  
-	  xml2db = new XML2DB();
+  public List<String> search(String dataset_path,String fileEndsWith) throws IOException {
+	this.fileEndsWith = fileEndsWith;  
 	  
 	searchDirectory(new File(dataset_path));
 
@@ -38,10 +33,10 @@ public class SearchXML {
 		System.out.println("Found : " + matched);
 	    }
 	}
+	return result;
   }
   public void searchDirectory(File directory) throws IOException {
 	if (directory.isDirectory()) {
-		
 		search(directory);
 	} else {
 	    System.out.println(directory.getAbsoluteFile() + " is not a directory!");
@@ -50,26 +45,23 @@ public class SearchXML {
 
   private void search(File file) throws IOException {
 	if (file.isDirectory()) {
-            //do you have permission to read this directory?
 	    if (file.canRead()) {
 		for (File temp : file.listFiles()) {
 		    if (temp.isDirectory()) {
-			search(temp);
-		    } 
-		    else {
-			if ((temp.getName().toLowerCase().endsWith("_report.xml"))) {
-			    result.add(temp.getAbsoluteFile().toString());
-			    try{
-			    	xml2db.connect(temp.getAbsolutePath());
-			    }catch(Exception e) {
-			    	e.printStackTrace();
-			    	}
-				}
+		    	String[] files = temp.list();
+		    	for(String eachfile: files ) {
+		    		if(eachfile.equalsIgnoreCase(fileEndsWith)) {
+		    		    result.add(temp.getAbsoluteFile().toString());
+		    		}
+		    	}
 	    	}
+		    else {
+		    }
 		}
+	    }
 	 } else {
 		System.out.println(file.getAbsoluteFile() + "Permission Denied");
-	 	}
-	}
+	 }
+      }
+
   }
-}

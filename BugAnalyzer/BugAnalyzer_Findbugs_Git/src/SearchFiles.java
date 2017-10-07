@@ -3,32 +3,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchXML {
-
-
+public class SearchFiles {
 	
+  private String fileNameEndsWith;
   private String fileNameToSearch;
+  private String dataset_path;
   private List<String> result = new ArrayList<String>();
 
-  XML2DB xml2db;
   public String getFileNameToSearch() {
 	return fileNameToSearch;
   }
-
   public void setFileNameToSearch(String fileNameToSearch) {
 	this.fileNameToSearch = fileNameToSearch;
   }
-
   public List<String> getResult() {
 	return result;
   }
-
-  public void search(String dataset_path) throws IOException {
-	  
-	  xml2db = new XML2DB();
-	  
+  public List<String> search(String dataset_path, String fileNameEndsWith) throws IOException {
+	this.dataset_path=dataset_path;
+	this.fileNameEndsWith = fileNameEndsWith;
 	searchDirectory(new File(dataset_path));
-
 	int count = getResult().size();
 	if(count ==0){
 	    System.out.println("\nNo result found!");
@@ -38,38 +32,35 @@ public class SearchXML {
 		System.out.println("Found : " + matched);
 	    }
 	}
+	return result;
   }
   public void searchDirectory(File directory) throws IOException {
 	if (directory.isDirectory()) {
-		
 		search(directory);
 	} else {
 	    System.out.println(directory.getAbsoluteFile() + " is not a directory!");
 	}
   }
-
   private void search(File file) throws IOException {
 	if (file.isDirectory()) {
-            //do you have permission to read this directory?
 	    if (file.canRead()) {
 		for (File temp : file.listFiles()) {
 		    if (temp.isDirectory()) {
 			search(temp);
 		    } 
-		    else {
-			if ((temp.getName().toLowerCase().endsWith("_report.xml"))) {
-			    result.add(temp.getAbsoluteFile().toString());
-			    try{
-			    	xml2db.connect(temp.getAbsolutePath());
-			    }catch(Exception e) {
-			    	e.printStackTrace();
-			    	}
-				}
-	    	}
-		}
+		    else {	
+		    	if ((temp.getName().toLowerCase().endsWith(fileNameEndsWith))) {
+		    		if(fileNameEndsWith == ".java") {
+		    			result.add(temp.getPath().replace(dataset_path+"/",""));
+		    		}else {
+		    		result.add(temp.getAbsoluteFile().toString());
+		    		}
+		    	}
+		    }
+	    }
 	 } else {
 		System.out.println(file.getAbsoluteFile() + "Permission Denied");
 	 	}
-	}
+     }
   }
 }

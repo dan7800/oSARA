@@ -1,0 +1,2 @@
+Update GITFileLogReport SET VERSION = 
+(select GITReport.VERSION from GITReport  where GITReport.COMMIT_ID = GITFileLogReport.COMMIT_ID);

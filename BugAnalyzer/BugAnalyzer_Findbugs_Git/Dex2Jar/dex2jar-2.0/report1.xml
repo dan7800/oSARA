@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="3.0.1" sequence="0" timestamp="1505788331000" analysisTimestamp="1505788456879" release="">
+  <Project projectName="">
+    <Jar>/home/satyajit/Documents/BugAnalyzer/BugAnalyzer_Findbugs_Git/Dex2Jar/dex2jar-2.0/xyz.jar</Jar>
+  </Project>
+  <BugInstance type="EC_UNRELATED_TYPES" priority="1" rank="1" abbrev="EC" category="CORRECTNESS" instanceHash="62b875f7b3054d3466b60299301d52c3" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Call to equals() comparing different types</ShortMessage>
+    <LongMessage>Call to net.chilon.matt.teacup.PlayerConfig.equals(String) in net.chilon.matt.teacup.Config.getPlayerRadioGroupId(Activity)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.Config" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.Config">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.Config</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.Config" name="getPlayerRadioGroupId" signature="(Landroid/app/Activity;)I" isStatic="false" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.Config" startBytecode="0" endBytecode="40"/>
+      <Message>In method net.chilon.matt.teacup.Config.getPlayerRadioGroupId(Activity)</Message>
+    </Method>
+    <Type descriptor="Ljava/lang/String;" role="TYPE_FOUND">
+      <SourceLine classname="java.lang.String" start="111" end="3141" sourcefile="String.java" sourcepath="java/lang/String.java">
+        <Message>At String.java:[lines 111-3141]</Message>
+      </SourceLine>
+      <Message>Actual type String</Message>
+    </Type>
+    <Type descriptor="Lnet/chilon/matt/teacup/PlayerConfig;" role="TYPE_EXPECTED">
+      <SourceLine classname="net.chilon.matt.teacup.PlayerConfig">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>Expected net.chilon.matt.teacup.PlayerConfig</Message>
+    </Type>
+    <LocalVariable name="?" register="1" pc="64" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from ?</Message>
+    </LocalVariable>
+    <Method classname="android.util.SparseArray" name="valueAt" signature="(I)Ljava/lang/Object;" isStatic="false" role="METHOD_RETURN_VALUE_OF">
+      <SourceLine classname="android.util.SparseArray"/>
+      <Message>Return value of android.util.SparseArray.valueAt(int) of type Object</Message>
+    </Method>
+    <Method classname="java.lang.Object" name="equals" signature="(Ljava/lang/Object;)Z" isStatic="false" role="METHOD_EQUALS_USED">
+      <SourceLine classname="java.lang.Object" start="149" end="149" startBytecode="0" endBytecode="45" sourcefile="Object.java" sourcepath="java/lang/Object.java"/>
+      <Message>Object.equals(Object) used to determine equality</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.Config" startBytecode="65" endBytecode="65">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" priority="2" rank="14" abbrev="DL" category="MT_CORRECTNESS" instanceHash="763fb7e12ab2a842698e7ea101aa16e5" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Synchronization on interned String </ShortMessage>
+    <LongMessage>Synchronization on interned String in net.chilon.matt.teacup.LastFM.cacheScrobble(Context, String, String, long)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cacheScrobble" signature="(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;J)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cacheScrobble(Context, String, String, long)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="2" endBytecode="2">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" priority="2" rank="14" abbrev="DL" category="MT_CORRECTNESS" instanceHash="149eed78aa26eac6fd80c03730a81349" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Synchronization on interned String </ShortMessage>
+    <LongMessage>Synchronization on interned String in net.chilon.matt.teacup.LastFM.clearScrobbleCache(Context)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="clearScrobbleCache" signature="(Landroid/content/Context;)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.clearScrobbleCache(Context)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="2" endBytecode="2">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" priority="2" rank="14" abbrev="DL" category="MT_CORRECTNESS" instanceHash="77695ec46510dc9bc32ac7c08063235e" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Synchronization on interned String </ShortMessage>
+    <LongMessage>Synchronization on interned String in net.chilon.matt.teacup.LastFM.getScrobbleCacheSize(Context)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="getScrobbleCacheSize" signature="(Landroid/content/Context;)J" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.getScrobbleCacheSize(Context)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="2" endBytecode="2">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" priority="2" rank="14" abbrev="DL" category="MT_CORRECTNESS" instanceHash="5565767590c36f9ca631df37bec79699" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Synchronization on interned String </ShortMessage>
+    <LongMessage>Synchronization on interned String in net.chilon.matt.teacup.LastFM.getSessionKey(Context, Config, boolean)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="getSessionKey" signature="(Landroid/content/Context;Lnet/chilon/matt/teacup/Config;Z)Ljava/lang/String;" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.getSessionKey(Context, Config, boolean)</Message>
+    </Method>
+    <String value="lastfm" role="STRING_CONSTANT">
+      <Message>String constant &quot;lastfm&quot;</Message>
+    </String>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="5" endBytecode="5">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" priority="2" rank="14" abbrev="DL" category="MT_CORRECTNESS" instanceHash="f6607ea0f699742c5693006a8bb6c8c7" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Synchronization on interned String </ShortMessage>
+    <LongMessage>Synchronization on interned String in net.chilon.matt.teacup.LastFM.scrobbleCache(Config, Context)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="scrobbleCache" signature="(Lnet/chilon/matt/teacup/Config;Landroid/content/Context;)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.scrobbleCache(Config, Context)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="14" endBytecode="14">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" priority="2" rank="14" abbrev="DL" category="MT_CORRECTNESS" instanceHash="80a5355cffa9bb50432205ff3144d2ae" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Synchronization on interned String </ShortMessage>
+    <LongMessage>Synchronization on interned String in net.chilon.matt.teacup.LastFM.scrobbleUpdate(Context, Config, String, String, long, boolean)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="scrobbleUpdate" signature="(Landroid/content/Context;Lnet/chilon/matt/teacup/Config;Ljava/lang/String;Ljava/lang/String;JZ)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.scrobbleUpdate(Context, Config, String, String, long, boolean)</Message>
+    </Method>
+    <String value="lastfm" role="STRING_CONSTANT">
+      <Message>String constant &quot;lastfm&quot;</Message>
+    </String>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="76" endBytecode="76">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" instanceHash="debdca4667fd7089c4e8faf4cbdca8c4" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <LongMessage>Found reliance on default encoding in net.chilon.matt.teacup.LastFM.cacheScrobble(Context, String, String, long): String.getBytes()</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cacheScrobble" signature="(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;J)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cacheScrobble(Context, String, String, long)</Message>
+    </Method>
+    <Method classname="java.lang.String" name="getBytes" signature="()[B" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.String" start="958" end="958" startBytecode="0" endBytecode="37" sourcefile="String.java" sourcepath="java/lang/String.java"/>
+      <Message>Called method String.getBytes()</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="30" endBytecode="30">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" instanceHash="92860e811f29af1d67ca1f8dcff06a85" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <LongMessage>Found reliance on default encoding in net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int): new java.io.InputStreamReader(InputStream)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cutDownCacheFile" signature="(Landroid/content/Context;I)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int)</Message>
+    </Method>
+    <Method classname="java.io.InputStreamReader" name="&lt;init&gt;" signature="(Ljava/io/InputStream;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.InputStreamReader" start="72" end="79" startBytecode="0" endBytecode="108" sourcefile="InputStreamReader.java" sourcepath="java/io/InputStreamReader.java"/>
+      <Message>Called method new java.io.InputStreamReader(InputStream)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="107" endBytecode="107">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" instanceHash="5acc1e9eb8b6b4bf80350f687f98e8a7" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <LongMessage>Found reliance on default encoding in net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int): String.getBytes()</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cutDownCacheFile" signature="(Landroid/content/Context;I)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int)</Message>
+    </Method>
+    <Method classname="java.lang.String" name="getBytes" signature="()[B" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.lang.String" start="958" end="958" startBytecode="0" endBytecode="37" sourcefile="String.java" sourcepath="java/lang/String.java"/>
+      <Message>Called method String.getBytes()</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="260" endBytecode="260">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" instanceHash="981f662c8dc6a82ea518611b3865f441" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <LongMessage>Found reliance on default encoding in net.chilon.matt.teacup.LastFM.logIS(InputStream): new java.io.InputStreamReader(InputStream)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="logIS" signature="(Ljava/io/InputStream;)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.logIS(InputStream)</Message>
+    </Method>
+    <Method classname="java.io.InputStreamReader" name="&lt;init&gt;" signature="(Ljava/io/InputStream;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.InputStreamReader" start="72" end="79" startBytecode="0" endBytecode="108" sourcefile="InputStreamReader.java" sourcepath="java/io/InputStreamReader.java"/>
+      <Message>Called method new java.io.InputStreamReader(InputStream)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="9" endBytecode="9">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="DM_DEFAULT_ENCODING" priority="1" rank="19" abbrev="Dm" category="I18N" instanceHash="961775f0a6f084330ddf6011ae0b0eda" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Reliance on default encoding</ShortMessage>
+    <LongMessage>Found reliance on default encoding in net.chilon.matt.teacup.LastFM.scrobbleCache(Config, Context): new java.io.InputStreamReader(InputStream)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="scrobbleCache" signature="(Lnet/chilon/matt/teacup/Config;Landroid/content/Context;)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.scrobbleCache(Config, Context)</Message>
+    </Method>
+    <Method classname="java.io.InputStreamReader" name="&lt;init&gt;" signature="(Ljava/io/InputStream;)V" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.InputStreamReader" start="72" end="79" startBytecode="0" endBytecode="108" sourcefile="InputStreamReader.java" sourcepath="java/io/InputStreamReader.java"/>
+      <Message>Called method new java.io.InputStreamReader(InputStream)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="63" endBytecode="63">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="OS_OPEN_STREAM" priority="2" rank="16" abbrev="OS" category="BAD_PRACTICE" instanceHash="945856e167f01acbe2747713d6db7d6e" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method may fail to close stream</ShortMessage>
+    <LongMessage>net.chilon.matt.teacup.LastFM.cacheScrobble(Context, String, String, long) may fail to close stream</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cacheScrobble" signature="(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;J)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="0" endBytecode="92"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cacheScrobble(Context, String, String, long)</Message>
+    </Method>
+    <Type descriptor="Ljava/io/OutputStream;" role="TYPE_CLOSEIT">
+      <SourceLine classname="java.io.OutputStream" start="46" end="152" sourcefile="OutputStream.java" sourcepath="java/io/OutputStream.java">
+        <Message>At OutputStream.java:[lines 46-152]</Message>
+      </SourceLine>
+      <Message>Need to close java.io.OutputStream </Message>
+    </Type>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="17" endBytecode="17">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="OS_OPEN_STREAM" priority="2" rank="16" abbrev="OS" category="BAD_PRACTICE" instanceHash="2a15638bd3e34332d378833f39a8ad22" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method may fail to close stream</ShortMessage>
+    <LongMessage>net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int) may fail to close stream</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cutDownCacheFile" signature="(Landroid/content/Context;I)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="0" endBytecode="453"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int)</Message>
+    </Method>
+    <Type descriptor="Ljava/io/OutputStream;" role="TYPE_CLOSEIT">
+      <SourceLine classname="java.io.OutputStream" start="46" end="152" sourcefile="OutputStream.java" sourcepath="java/io/OutputStream.java">
+        <Message>At OutputStream.java:[lines 46-152]</Message>
+      </SourceLine>
+      <Message>Need to close java.io.OutputStream </Message>
+    </Type>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="139" endBytecode="139">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="OS_OPEN_STREAM" priority="2" rank="16" abbrev="OS" category="BAD_PRACTICE" instanceHash="281ca87a5211d5fbe1da9e50bed0b4d4" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method may fail to close stream</ShortMessage>
+    <LongMessage>net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int) may fail to close stream</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cutDownCacheFile" signature="(Landroid/content/Context;I)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="0" endBytecode="453"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int)</Message>
+    </Method>
+    <Type descriptor="Ljava/io/Reader;" role="TYPE_CLOSEIT">
+      <SourceLine classname="java.io.Reader" start="66" end="249" sourcefile="Reader.java" sourcepath="java/io/Reader.java">
+        <Message>At Reader.java:[lines 66-249]</Message>
+      </SourceLine>
+      <Message>Need to close java.io.Reader </Message>
+    </Type>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="97" endBytecode="97">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" priority="2" rank="16" abbrev="RV" category="BAD_PRACTICE" instanceHash="32d44d59ce6d74b54220d898d934b763" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="253">
+    <ShortMessage>Method ignores exceptional return value</ShortMessage>
+    <LongMessage>Exceptional return value of java.io.File.mkdirs() ignored in net.chilon.matt.teacup.LastFM.cacheBitmap(Config, String, String, String, Bitmap)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cacheBitmap" signature="(Lnet/chilon/matt/teacup/Config;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/graphics/Bitmap;)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cacheBitmap(Config, String, String, String, Bitmap)</Message>
+    </Method>
+    <Method classname="java.io.File" name="mkdirs" signature="()Z" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.File" start="1340" end="1354" startBytecode="0" endBytecode="182" sourcefile="File.java" sourcepath="java/io/File.java"/>
+      <Message>Called method java.io.File.mkdirs()</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="26" endBytecode="26">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" priority="2" rank="16" abbrev="RV" category="BAD_PRACTICE" instanceHash="8e15a921edd6a5f79e680ca0f4eb417" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="253">
+    <ShortMessage>Method ignores exceptional return value</ShortMessage>
+    <LongMessage>Exceptional return value of java.io.File.renameTo(File) ignored in net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="cutDownCacheFile" signature="(Landroid/content/Context;I)V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.cutDownCacheFile(Context, int)</Message>
+    </Method>
+    <Method classname="java.io.File" name="renameTo" signature="(Ljava/io/File;)Z" isStatic="false" role="METHOD_CALLED">
+      <SourceLine classname="java.io.File" start="1386" end="1397" startBytecode="0" endBytecode="133" sourcefile="File.java" sourcepath="java/io/File.java"/>
+      <Message>Called method java.io.File.renameTo(File)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="413" endBytecode="413">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SWL_SLEEP_WITH_LOCK_HELD" priority="2" rank="14" abbrev="SWL" category="MT_CORRECTNESS" instanceHash="4244b9ba9324287e6fd6f54b1415c7d6" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method calls Thread.sleep() with a lock held</ShortMessage>
+    <LongMessage>net.chilon.matt.teacup.LastFM.waitForRequestPermission() calls Thread.sleep() with a lock held</LongMessage>
+    <Class classname="net.chilon.matt.teacup.LastFM" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.LastFM</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.LastFM" name="waitForRequestPermission" signature="()V" isStatic="true" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.LastFM"/>
+      <Message>In method net.chilon.matt.teacup.LastFM.waitForRequestPermission()</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.LastFM" startBytecode="67" endBytecode="67">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="8c1faa8824c47a6cb9effa7e413b5ee5" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$attr doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$attr" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$attr">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$attr</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$attr" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="e3ae9df951d358ea3f2ac62aa3056f8c" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$drawable doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$drawable" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$drawable">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$drawable</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$drawable" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="830bd80fd3f0be491fbb1a9906366a58" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$id doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$id" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$id">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$id</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$id" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="1a54057efecfa9dd66bf8717e2099215" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$layout doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$layout" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$layout">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$layout</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$layout" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="cb0abc27884831e72201484c9af72c22" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$string doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$string" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$string">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$string</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$string" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="1e8daa15528d2cbc615eaac617af486" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$style doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$style" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$style">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$style</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$style" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NM_CLASS_NAMING_CONVENTION" priority="2" rank="16" abbrev="Nm" category="BAD_PRACTICE" instanceHash="b9a87faafb6fbb1edb3cdfe8ccbfc765" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Class names should start with an upper case letter</ShortMessage>
+    <LongMessage>The class name net.chilon.matt.teacup.R$xml doesn&apos;t start with an upper case letter</LongMessage>
+    <Class classname="net.chilon.matt.teacup.R$xml" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.R$xml">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.R$xml</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.R$xml" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="LI_LAZY_INIT_UPDATE_STATIC" priority="2" rank="8" abbrev="LI" category="MT_CORRECTNESS" instanceHash="eff9a15e644ef395b5e815cd779cec79" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="543">
+    <ShortMessage>Incorrect lazy initialization and update of static field</ShortMessage>
+    <LongMessage>Incorrect lazy initialization and update of static field net.chilon.matt.teacup.TeaCupService.previousMeta in net.chilon.matt.teacup.TeaCupService.updateMeta(Config, Context, Intent)</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.TeaCupService" name="updateMeta" signature="(Lnet/chilon/matt/teacup/Config;Landroid/content/Context;Landroid/content/Intent;)V" isStatic="false" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService" startBytecode="0" endBytecode="47"/>
+      <Message>In method net.chilon.matt.teacup.TeaCupService.updateMeta(Config, Context, Intent)</Message>
+    </Method>
+    <Field classname="net.chilon.matt.teacup.TeaCupService" name="previousMeta" signature="Lnet/chilon/matt/teacup/TeaCupService$UpdateMetaTask;" isStatic="true" primary="true" role="FIELD_ON">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>On field net.chilon.matt.teacup.TeaCupService.previousMeta</Message>
+    </Field>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService" startBytecode="0" endBytecode="75">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SIC_INNER_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SIC" category="PERFORMANCE" instanceHash="935f108d2d5e4a764e3ea4df49aab5e3" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Should be a static inner class</ShortMessage>
+    <LongMessage>Should net.chilon.matt.teacup.TeaCupService$LastFMScrobbleCacheTask be a _static_ inner class?</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService$LastFMScrobbleCacheTask" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$LastFMScrobbleCacheTask">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService$LastFMScrobbleCacheTask</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$LastFMScrobbleCacheTask" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SIC_INNER_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SIC" category="PERFORMANCE" instanceHash="7125686f7e8b4dac70e8446f12abce40" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Should be a static inner class</ShortMessage>
+    <LongMessage>Should net.chilon.matt.teacup.TeaCupService$MetaData be a _static_ inner class?</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService$MetaData" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$MetaData">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService$MetaData</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$MetaData" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SIC_INNER_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SIC" category="PERFORMANCE" instanceHash="a34940f55749dd0fdfd2c4f1e53457c" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Should be a static inner class</ShortMessage>
+    <LongMessage>Should net.chilon.matt.teacup.TeaCupService$UpdateLastFMArgs be a _static_ inner class?</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService$UpdateLastFMArgs" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateLastFMArgs">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService$UpdateLastFMArgs</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateLastFMArgs" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="SIC_INNER_SHOULD_BE_STATIC" priority="2" rank="18" abbrev="SIC" category="PERFORMANCE" instanceHash="83cfbdabdfb09c492553d5560c65fc57" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Should be a static inner class</ShortMessage>
+    <LongMessage>Should net.chilon.matt.teacup.TeaCupService$UpdateMetaArgs be a _static_ inner class?</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaArgs" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaArgs">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService$UpdateMetaArgs</Message>
+    </Class>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaArgs" synthetic="true">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" priority="2" rank="13" abbrev="NP" category="STYLE" instanceHash="de7b3fd0802bb39f8433849fa7a15d0c" instanceOccurrenceNum="0" instanceOccurrenceMax="0" cweid="476">
+    <ShortMessage>Possible null pointer dereference due to return value of called method</ShortMessage>
+    <LongMessage>Possible null pointer dereference in net.chilon.matt.teacup.TeaCupService$UpdateMetaTask.getImageFromDirectory(String) due to return value of called method</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService$UpdateMetaTask</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" name="getImageFromDirectory" signature="(Ljava/lang/String;)Landroid/graphics/Bitmap;" isStatic="false" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask"/>
+      <Message>In method net.chilon.matt.teacup.TeaCupService$UpdateMetaTask.getImageFromDirectory(String)</Message>
+    </Method>
+    <LocalVariable name="?" register="5" pc="52" role="LOCAL_VARIABLE_VALUE_OF">
+      <Message>Value loaded from ?</Message>
+    </LocalVariable>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" startBytecode="54" endBytecode="54" role="SOURCE_LINE_DEREF">
+      <Message>Dereferenced at &lt;Unknown&gt;</Message>
+    </SourceLine>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" startBytecode="39" endBytecode="39" role="SOURCE_LINE_KNOWN_NULL">
+      <Message>Known null at &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugInstance type="UL_UNRELEASED_LOCK_EXCEPTION_PATH" priority="2" rank="14" abbrev="UL" category="MT_CORRECTNESS" instanceHash="419f102f0067cec3374d05562d1edb0f" instanceOccurrenceNum="0" instanceOccurrenceMax="0">
+    <ShortMessage>Method does not release lock on all exception paths</ShortMessage>
+    <LongMessage>net.chilon.matt.teacup.TeaCupService$UpdateMetaTask.updateMeta(Config, Context, Intent) does not release lock on all exception paths</LongMessage>
+    <Class classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask">
+        <Message>In &lt;Unknown&gt;</Message>
+      </SourceLine>
+      <Message>In class net.chilon.matt.teacup.TeaCupService$UpdateMetaTask</Message>
+    </Class>
+    <Method classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" name="updateMeta" signature="(Lnet/chilon/matt/teacup/Config;Landroid/content/Context;Landroid/content/Intent;)V" isStatic="false" primary="true">
+      <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" startBytecode="0" endBytecode="79"/>
+      <Message>In method net.chilon.matt.teacup.TeaCupService$UpdateMetaTask.updateMeta(Config, Context, Intent)</Message>
+    </Method>
+    <SourceLine classname="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" startBytecode="46" endBytecode="46">
+      <Message>In &lt;Unknown&gt;</Message>
+    </SourceLine>
+  </BugInstance>
+  <BugCategory category="BAD_PRACTICE">
+    <Description>Bad practice</Description>
+  </BugCategory>
+  <BugCategory category="CORRECTNESS">
+    <Description>Correctness</Description>
+  </BugCategory>
+  <BugCategory category="PERFORMANCE">
+    <Description>Performance</Description>
+  </BugCategory>
+  <BugCategory category="STYLE">
+    <Description>Dodgy code</Description>
+  </BugCategory>
+  <BugCategory category="MT_CORRECTNESS">
+    <Description>Multithreaded correctness</Description>
+  </BugCategory>
+  <BugCategory category="I18N">
+    <Description>Internationalization</Description>
+  </BugCategory>
+  <BugPattern type="SWL_SLEEP_WITH_LOCK_HELD" abbrev="SWL" category="MT_CORRECTNESS">
+    <ShortDescription>Method calls Thread.sleep() with a lock held</ShortDescription>
+    <Details><![CDATA[
+      
+      <p>
+      This method calls Thread.sleep() with a lock held.  This may result
+      in very poor performance and scalability, or a deadlock, since other threads may
+      be waiting to acquire the lock.  It is a much better idea to call
+      wait() on the lock, which releases the lock and allows other threads
+      to run.
+      </p>
+      
+   ]]></Details>
+  </BugPattern>
+  <BugPattern type="NM_CLASS_NAMING_CONVENTION" abbrev="Nm" category="BAD_PRACTICE">
+    <ShortDescription>Class names should start with an upper case letter</ShortDescription>
+    <Details><![CDATA[
+
+  <p> Class names should be nouns, in mixed case with the first letter of each internal word capitalized. Try to keep your class names simple and descriptive. Use whole words-avoid acronyms and abbreviations (unless the abbreviation is much more widely used than the long form, such as URL or HTML).
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" abbrev="DL" category="MT_CORRECTNESS">
+    <ShortDescription>Synchronization on interned String </ShortDescription>
+    <Details><![CDATA[
+
+  <p> The code synchronizes on interned String.</p>
+<pre>
+private static String LOCK = "LOCK";
+...
+  synchronized(LOCK) { ...}
+...
+</pre>
+<p>Constant Strings are interned and shared across all other classes loaded by the JVM. Thus, this could
+is locking on something that other code might also be locking. This could result in very strange and hard to diagnose
+blocking and deadlock behavior. See <a href="http://www.javalobby.org/java/forums/t96352.html">http://www.javalobby.org/java/forums/t96352.html</a> and <a href="http://jira.codehaus.org/browse/JETTY-352">http://jira.codehaus.org/browse/JETTY-352</a>.
+</p>
+<p>See CERT <a href="https://www.securecoding.cert.org/confluence/display/java/CON08-J.+Do+not+synchronize+on+objects+that+may+be+reused">CON08-J. Do not synchronize on objects that may be reused</a> for more information.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="EC_UNRELATED_TYPES" abbrev="EC" category="CORRECTNESS">
+    <ShortDescription>Call to equals() comparing different types</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method calls equals(Object) on two references of different
+class types and analysis suggests they will be to objects of different classes 
+at runtime. Further, examination of the equals methods that would be invoked suggest that either
+this call will always return false, or else the equals method is not be symmetric (which is 
+a property required by the contract
+for equals in class Object). 
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="SIC_INNER_SHOULD_BE_STATIC" abbrev="SIC" category="PERFORMANCE">
+    <ShortDescription>Should be a static inner class</ShortDescription>
+    <Details><![CDATA[
+
+  <p> This class is an inner class, but does not use its embedded reference
+  to the object which created it.&nbsp; This reference makes the instances
+  of the class larger, and may keep the reference to the creator object
+  alive longer than necessary.&nbsp; If possible, the class should be
+   made static.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="UL_UNRELEASED_LOCK_EXCEPTION_PATH" abbrev="UL" category="MT_CORRECTNESS">
+    <ShortDescription>Method does not release lock on all exception paths</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method acquires a JSR-166 (<code>java.util.concurrent</code>) lock,
+but does not release it on all exception paths out of the method.  In general, the correct idiom
+for using a JSR-166 lock is:
+</p>
+<pre>
+    Lock l = ...;
+    l.lock();
+    try {
+        // do something
+    } finally {
+        l.unlock();
+    }
+</pre>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" abbrev="NP" category="STYLE">
+    <ShortDescription>Possible null pointer dereference due to return value of called method</ShortDescription>
+    <Details><![CDATA[
+      
+<p> The return value from a method is dereferenced without a null check,
+and the return value of that method is one that should generally be checked
+for null.  This may lead to a <code>NullPointerException</code> when the code is executed.
+</p>
+      
+   ]]></Details>
+  </BugPattern>
+  <BugPattern type="DM_DEFAULT_ENCODING" abbrev="Dm" category="I18N">
+    <ShortDescription>Reliance on default encoding</ShortDescription>
+    <Details><![CDATA[
+
+<p> Found a call to a method which will perform a byte to String (or String to byte) conversion, and will assume that the default platform encoding is suitable. This will cause the application behaviour to vary between platforms. Use an alternative API and specify a charset name or Charset object explicitly.  </p>
+
+      ]]></Details>
+  </BugPattern>
+  <BugPattern type="OS_OPEN_STREAM" abbrev="OS" category="BAD_PRACTICE">
+    <ShortDescription>Method may fail to close stream</ShortDescription>
+    <Details><![CDATA[
+
+<p> The method creates an IO stream object, does not assign it to any
+fields, pass it to other methods that might close it,
+or return it, and does not appear to close
+the stream on all paths out of the method.&nbsp; This may result in
+a file descriptor leak.&nbsp; It is generally a good
+idea to use a <code>finally</code> block to ensure that streams are
+closed.</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="RV_RETURN_VALUE_IGNORED_BAD_PRACTICE" abbrev="RV" category="BAD_PRACTICE" cweid="253">
+    <ShortDescription>Method ignores exceptional return value</ShortDescription>
+    <Details><![CDATA[
+
+   <p> This method returns a value that is not checked. The return value should be checked
+since it can indicate an unusual or unexpected function execution. For
+example, the <code>File.delete()</code> method returns false
+if the file could not be successfully deleted (rather than
+throwing an Exception).
+If you don't check the result, you won't notice if the method invocation
+signals unexpected behavior by returning an atypical return value.
+</p>
+
+    ]]></Details>
+  </BugPattern>
+  <BugPattern type="LI_LAZY_INIT_UPDATE_STATIC" abbrev="LI" category="MT_CORRECTNESS" cweid="543">
+    <ShortDescription>Incorrect lazy initialization and update of static field</ShortDescription>
+    <Details><![CDATA[
+
+<p> This method contains an unsynchronized lazy initialization of a static field.
+After the field is set, the object stored into that location is further updated or accessed.
+The setting of the field is visible to other threads as soon as it is set. If the
+futher accesses in the method that set the field serve to initialize the object, then
+you have a <em>very serious</em> multithreading bug, unless something else prevents
+any other thread from accessing the stored object until it is fully initialized.
+</p>
+<p>Even if you feel confident that the method is never called by multiple
+threads, it might be better to not set the static field until the value
+you are setting it to is fully populated/initialized.
+
+    ]]></Details>
+  </BugPattern>
+  <BugCode abbrev="NP" cweid="476">
+    <Description>Null pointer dereference</Description>
+  </BugCode>
+  <BugCode abbrev="OS">
+    <Description>Stream not closed on all paths</Description>
+  </BugCode>
+  <BugCode abbrev="RV" cweid="440">
+    <Description>Bad use of return value from method</Description>
+  </BugCode>
+  <BugCode abbrev="UL">
+    <Description>Lock not released on all paths</Description>
+  </BugCode>
+  <BugCode abbrev="DL">
+    <Description>Unintended contention or possible deadlock due to locking on shared objects</Description>
+  </BugCode>
+  <BugCode abbrev="Dm">
+    <Description>Dubious method used</Description>
+  </BugCode>
+  <BugCode abbrev="SWL">
+    <Description>Sleep with lock held</Description>
+  </BugCode>
+  <BugCode abbrev="SIC">
+    <Description>Inner class could be made static</Description>
+  </BugCode>
+  <BugCode abbrev="LI">
+    <Description>Unsynchronized Lazy Initialization</Description>
+  </BugCode>
+  <BugCode abbrev="EC">
+    <Description>Comparing incompatible types for equality</Description>
+  </BugCode>
+  <BugCode abbrev="Nm">
+    <Description>Confusing method name</Description>
+  </BugCode>
+  <Errors errors="0" missingClasses="54">
+    <MissingClass>android.app.Activity</MissingClass>
+    <MissingClass>android.app.ActivityManager</MissingClass>
+    <MissingClass>android.app.ActivityManager$RunningServiceInfo</MissingClass>
+    <MissingClass>android.app.PendingIntent</MissingClass>
+    <MissingClass>android.app.Service</MissingClass>
+    <MissingClass>android.appwidget.AppWidgetManager</MissingClass>
+    <MissingClass>android.appwidget.AppWidgetProvider</MissingClass>
+    <MissingClass>android.content.BroadcastReceiver</MissingClass>
+    <MissingClass>android.content.ComponentName</MissingClass>
+    <MissingClass>android.content.ContentResolver</MissingClass>
+    <MissingClass>android.content.Context</MissingClass>
+    <MissingClass>android.content.Intent</MissingClass>
+    <MissingClass>android.content.IntentFilter</MissingClass>
+    <MissingClass>android.content.SharedPreferences</MissingClass>
+    <MissingClass>android.content.SharedPreferences$Editor</MissingClass>
+    <MissingClass>android.content.pm.PackageManager</MissingClass>
+    <MissingClass>android.content.res.Resources</MissingClass>
+    <MissingClass>android.database.Cursor</MissingClass>
+    <MissingClass>android.graphics.Bitmap</MissingClass>
+    <MissingClass>android.graphics.Bitmap$CompressFormat</MissingClass>
+    <MissingClass>android.graphics.BitmapFactory</MissingClass>
+    <MissingClass>android.graphics.BitmapFactory$Options</MissingClass>
+    <MissingClass>android.media.MediaMetadataRetriever</MissingClass>
+    <MissingClass>android.net.ConnectivityManager</MissingClass>
+    <MissingClass>android.net.NetworkInfo</MissingClass>
+    <MissingClass>android.net.Uri</MissingClass>
+    <MissingClass>android.os.AsyncTask</MissingClass>
+    <MissingClass>android.os.Bundle</MissingClass>
+    <MissingClass>android.os.Environment</MissingClass>
+    <MissingClass>android.provider.MediaStore$Audio$Media</MissingClass>
+    <MissingClass>android.text.Editable</MissingClass>
+    <MissingClass>android.util.Log</MissingClass>
+    <MissingClass>android.util.SparseArray</MissingClass>
+    <MissingClass>android.view.View</MissingClass>
+    <MissingClass>android.view.View$OnClickListener</MissingClass>
+    <MissingClass>android.widget.Button</MissingClass>
+    <MissingClass>android.widget.CheckBox</MissingClass>
+    <MissingClass>android.widget.EditText</MissingClass>
+    <MissingClass>android.widget.ProgressBar</MissingClass>
+    <MissingClass>android.widget.RadioButton</MissingClass>
+    <MissingClass>android.widget.RadioGroup</MissingClass>
+    <MissingClass>android.widget.RemoteViews</MissingClass>
+    <MissingClass>android.widget.TextView</MissingClass>
+    <MissingClass>org.apache.http.HttpEntity</MissingClass>
+    <MissingClass>org.apache.http.HttpResponse</MissingClass>
+    <MissingClass>org.apache.http.NameValuePair</MissingClass>
+    <MissingClass>org.apache.http.client.ClientProtocolException</MissingClass>
+    <MissingClass>org.apache.http.client.HttpClient</MissingClass>
+    <MissingClass>org.apache.http.client.entity.UrlEncodedFormEntity</MissingClass>
+    <MissingClass>org.apache.http.client.methods.HttpPost</MissingClass>
+    <MissingClass>org.apache.http.impl.client.DefaultHttpClient</MissingClass>
+    <MissingClass>org.apache.http.message.BasicNameValuePair</MissingClass>
+    <MissingClass>org.xmlpull.v1.XmlPullParser</MissingClass>
+    <MissingClass>org.xmlpull.v1.XmlPullParserFactory</MissingClass>
+  </Errors>
+  <FindBugsSummary timestamp="Mon, 18 Sep 2017 22:32:11 -0400" total_classes="36" referenced_classes="133" total_bugs="32" total_size="1901" num_packages="2" java_version="1.8.0_131" vm_version="25.131-b11" cpu_seconds="17.93" clock_seconds="10.12" peak_mbytes="203.67" alloc_mbytes="875.00" gc_seconds="0.17" priority_2="26" priority_1="6">
+    <FileStats path="android/annotation/&lt;Unknown&gt;" bugCount="0" size="4"/>
+    <FileStats path="net/chilon/matt/teacup/&lt;Unknown&gt;" bugCount="32" size="1897" bugHash="6cbbe3cfa62f0a6326fa4f64342d5984"/>
+    <PackageStats package="android.annotation" total_bugs="0" total_types="2" total_size="4">
+      <ClassStats class="android.annotation.SuppressLint" sourceFile="&lt;Unknown&gt;" interface="true" size="2" bugs="0"/>
+      <ClassStats class="android.annotation.TargetApi" sourceFile="&lt;Unknown&gt;" interface="true" size="2" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="net.chilon.matt.teacup" total_bugs="32" total_types="34" total_size="1897" priority_2="26" priority_1="6">
+      <ClassStats class="net.chilon.matt.teacup.AlbumArtFactory" sourceFile="&lt;Unknown&gt;" interface="false" size="24" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.BuildConfig" sourceFile="&lt;Unknown&gt;" interface="false" size="3" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.Config" sourceFile="&lt;Unknown&gt;" interface="false" size="327" bugs="1" priority_1="1"/>
+      <ClassStats class="net.chilon.matt.teacup.LastFM" sourceFile="&lt;Unknown&gt;" interface="false" size="661" bugs="17" priority_2="12" priority_1="5"/>
+      <ClassStats class="net.chilon.matt.teacup.LastFM$1" sourceFile="&lt;Unknown&gt;" interface="false" size="3" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.LastFM$2" sourceFile="&lt;Unknown&gt;" interface="false" size="7" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.LastFM$3" sourceFile="&lt;Unknown&gt;" interface="false" size="8" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.LastFM$PrefetchState" sourceFile="&lt;Unknown&gt;" interface="false" size="18" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.LastFM$ScrobbleType" sourceFile="&lt;Unknown&gt;" interface="false" size="18" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.PlayerConfig" sourceFile="&lt;Unknown&gt;" interface="false" size="87" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.ProgressUpdater" sourceFile="&lt;Unknown&gt;" interface="true" size="3" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.R" sourceFile="&lt;Unknown&gt;" interface="false" size="2" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.R$attr" sourceFile="&lt;Unknown&gt;" interface="false" size="2" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.R$drawable" sourceFile="&lt;Unknown&gt;" interface="false" size="11" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.R$id" sourceFile="&lt;Unknown&gt;" interface="false" size="79" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.R$layout" sourceFile="&lt;Unknown&gt;" interface="false" size="4" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.R$string" sourceFile="&lt;Unknown&gt;" interface="false" size="71" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.R$style" sourceFile="&lt;Unknown&gt;" interface="false" size="4" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.R$xml" sourceFile="&lt;Unknown&gt;" interface="false" size="3" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.ServiceStarter" sourceFile="&lt;Unknown&gt;" interface="false" size="16" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCup" sourceFile="&lt;Unknown&gt;" interface="false" size="80" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupConfiguration" sourceFile="&lt;Unknown&gt;" interface="false" size="128" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupConfiguration$1" sourceFile="&lt;Unknown&gt;" interface="false" size="12" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupConfiguration$2" sourceFile="&lt;Unknown&gt;" interface="false" size="9" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupConfiguration$PrefetchLastFMArtTask" sourceFile="&lt;Unknown&gt;" interface="false" size="38" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService" sourceFile="&lt;Unknown&gt;" interface="false" size="96" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$1" sourceFile="&lt;Unknown&gt;" interface="false" size="16" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$LastFMScrobbleCacheTask" sourceFile="&lt;Unknown&gt;" interface="false" size="11" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$MetaData" sourceFile="&lt;Unknown&gt;" interface="false" size="14" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$UpdateLastFMArgs" sourceFile="&lt;Unknown&gt;" interface="false" size="7" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$UpdateLastFMTask" sourceFile="&lt;Unknown&gt;" interface="false" size="21" bugs="0"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$UpdateMetaArgs" sourceFile="&lt;Unknown&gt;" interface="false" size="8" bugs="1" priority_2="1"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask" sourceFile="&lt;Unknown&gt;" interface="false" size="93" bugs="2" priority_2="2"/>
+      <ClassStats class="net.chilon.matt.teacup.TeaCupService$UpdateMetaTask$1" sourceFile="&lt;Unknown&gt;" interface="false" size="13" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="974" invocations="810" avgMicrosecondsPerInvocation="1202" maxMicrosecondsPerInvocation="56438" standardDeviationMircosecondsPerInvocation="3600"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="527" invocations="216" avgMicrosecondsPerInvocation="2443" maxMicrosecondsPerInvocation="35867" standardDeviationMircosecondsPerInvocation="5015"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="493" invocations="225" avgMicrosecondsPerInvocation="2192" maxMicrosecondsPerInvocation="30806" standardDeviationMircosecondsPerInvocation="4432"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="486" invocations="241" avgMicrosecondsPerInvocation="2020" maxMicrosecondsPerInvocation="36615" standardDeviationMircosecondsPerInvocation="4791"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="477" invocations="247" avgMicrosecondsPerInvocation="1932" maxMicrosecondsPerInvocation="83277" standardDeviationMircosecondsPerInvocation="6501"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="373" invocations="133" avgMicrosecondsPerInvocation="2809" maxMicrosecondsPerInvocation="27747" standardDeviationMircosecondsPerInvocation="5410"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="331" invocations="225" avgMicrosecondsPerInvocation="1472" maxMicrosecondsPerInvocation="47057" standardDeviationMircosecondsPerInvocation="3768"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="315" invocations="225" avgMicrosecondsPerInvocation="1403" maxMicrosecondsPerInvocation="21206" standardDeviationMircosecondsPerInvocation="3234"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="287" invocations="133" avgMicrosecondsPerInvocation="2162" maxMicrosecondsPerInvocation="32111" standardDeviationMircosecondsPerInvocation="5042"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="273" invocations="520" avgMicrosecondsPerInvocation="526" maxMicrosecondsPerInvocation="11085" standardDeviationMircosecondsPerInvocation="1279"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="203" invocations="191" avgMicrosecondsPerInvocation="1066" maxMicrosecondsPerInvocation="12443" standardDeviationMircosecondsPerInvocation="2351"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="182" invocations="217" avgMicrosecondsPerInvocation="840" maxMicrosecondsPerInvocation="109817" standardDeviationMircosecondsPerInvocation="7493"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="164" invocations="705" avgMicrosecondsPerInvocation="233" maxMicrosecondsPerInvocation="10457" standardDeviationMircosecondsPerInvocation="784"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="124" invocations="133" avgMicrosecondsPerInvocation="939" maxMicrosecondsPerInvocation="20406" standardDeviationMircosecondsPerInvocation="2742"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="112" invocations="36" avgMicrosecondsPerInvocation="3120" maxMicrosecondsPerInvocation="34712" standardDeviationMircosecondsPerInvocation="8426"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindInconsistentSync2" totalMilliseconds="111" invocations="36" avgMicrosecondsPerInvocation="3102" maxMicrosecondsPerInvocation="36823" standardDeviationMircosecondsPerInvocation="7398"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="111" invocations="133" avgMicrosecondsPerInvocation="837" maxMicrosecondsPerInvocation="52284" standardDeviationMircosecondsPerInvocation="4713"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="107" invocations="229" avgMicrosecondsPerInvocation="469" maxMicrosecondsPerInvocation="35530" standardDeviationMircosecondsPerInvocation="2562"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="103" invocations="133" avgMicrosecondsPerInvocation="777" maxMicrosecondsPerInvocation="15187" standardDeviationMircosecondsPerInvocation="1983"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="99" invocations="225" avgMicrosecondsPerInvocation="443" maxMicrosecondsPerInvocation="11966" standardDeviationMircosecondsPerInvocation="1486"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="92" invocations="133" avgMicrosecondsPerInvocation="693" maxMicrosecondsPerInvocation="10020" standardDeviationMircosecondsPerInvocation="1457"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="87" invocations="814" avgMicrosecondsPerInvocation="107" maxMicrosecondsPerInvocation="11844" standardDeviationMircosecondsPerInvocation="545"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.UnreadFields" totalMilliseconds="87" invocations="36" avgMicrosecondsPerInvocation="2434" maxMicrosecondsPerInvocation="22369" standardDeviationMircosecondsPerInvocation="4669"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="83" invocations="133" avgMicrosecondsPerInvocation="627" maxMicrosecondsPerInvocation="9923" standardDeviationMircosecondsPerInvocation="1619"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.RuntimeExceptionCapture" totalMilliseconds="81" invocations="36" avgMicrosecondsPerInvocation="2250" maxMicrosecondsPerInvocation="38803" standardDeviationMircosecondsPerInvocation="7015"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase" totalMilliseconds="80" invocations="4419" avgMicrosecondsPerInvocation="18" maxMicrosecondsPerInvocation="9394" standardDeviationMircosecondsPerInvocation="234"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethods" totalMilliseconds="77" invocations="36" avgMicrosecondsPerInvocation="2149" maxMicrosecondsPerInvocation="21849" standardDeviationMircosecondsPerInvocation="5119"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="73" invocations="133" avgMicrosecondsPerInvocation="552" maxMicrosecondsPerInvocation="18007" standardDeviationMircosecondsPerInvocation="2118"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref$CheckCallSitesAndReturnInstructions" totalMilliseconds="65" invocations="216" avgMicrosecondsPerInvocation="302" maxMicrosecondsPerInvocation="7266" standardDeviationMircosecondsPerInvocation="927"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DefaultEncodingDetector" totalMilliseconds="64" invocations="36" avgMicrosecondsPerInvocation="1787" maxMicrosecondsPerInvocation="41884" standardDeviationMircosecondsPerInvocation="6966"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNullDeref" totalMilliseconds="62" invocations="36" avgMicrosecondsPerInvocation="1743" maxMicrosecondsPerInvocation="23244" standardDeviationMircosecondsPerInvocation="4654"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>

@@ -4,10 +4,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.Objects;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -15,74 +14,87 @@ import org.w3c.dom.NodeList;
 
 public class XML2DB {
 
-	private String db = "jdbc:sqlite:Dataset/report.db";
+	private String db = "jdbc:sqlite:Dataset/gitreport.db";
 	
 	public void connect(String xmlfile_path) throws Exception{
 		Connection conn = null;
 		try{
 			conn = DriverManager.getConnection(db);
-			
-			String st = "CREATE TABLE IF NOT EXISTS DBreport (\n"
+			String st = "CREATE TABLE IF NOT EXISTS FindBugsResult (\n"
 	                + "	PROJECT text,\n"
+					+ " BUG_INSTANCE_HASH text\n,"
 	                + "	BUG_TYPE text,\n"
+					+ " BUG_PRIORITY, \n"
 	                + "	BUG_CATEGORY text,\n"
 	                + " SOURCE_LINE text,\n"
-	                +" SHORT_MESSAGE \n"
+	                + " SHORT_MESSAGE, \n"
+	                + " VERSION \n"
 	                + ");";
 			Statement stmt = conn.createStatement();
 			stmt.execute(st);
-			System.out.println("Coonection Established");
-	
-    
-
+			
         File xmlFile = new File(xmlfile_path);
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(xmlFile);
         
-        
+        String[] jarDir = xmlfile_path.split("/");
+        String jarFilePath = jarDir[jarDir.length-1];
+        String[] jarFilePathDir = jarFilePath.split("\\_");
+        String jarFile = jarFilePathDir[0]+jarFilePathDir[1]; 
         NodeList nList = doc.getElementsByTagName("BugCollection");
         
         for (int i = 0; i < nList.getLength(); i++) {
-            System.out.println("Processing element " + (i+1) + "/" + nList.getLength());
             Node node = nList.item(i);
             
             if (node.getNodeType() == Node.ELEMENT_NODE) {
-                Element element = (Element) node;
-                String projectJar = element.getElementsByTagName("Project").item(0).getTextContent();
-                
+                Element element = (Element) node;                
                 NodeList bugInstance = element.getElementsByTagName("BugInstance");	
-                
                 for (int j = 0; j < bugInstance.getLength(); j++) {
                     Node bug = bugInstance.item(j);
                     if (bug.getNodeType() == Node.ELEMENT_NODE) {
-                        Element currentBug = (Element) bug;
-                        String bugType =  currentBug.getAttributes().getNamedItem("type").getNodeValue() ;
-                        String bugCategory =  currentBug.getAttributes().getNamedItem("category").getNodeValue();
-                        String bugLine =  currentBug.getElementsByTagName("SourceLine").item(0).getTextContent();
-                       // String class =  currentBug.getElementsByTagName("Class").item(0).getAttributes().getNamedItem("sourcefile").getTextContent();
-                        String sMessage = currentBug.getElementsByTagName("ShortMessage").item(0).getTextContent();
-                        String lMessage = currentBug.getElementsByTagName("LongMessage").item(0).getTextContent();
-                    
-                        String sql="INSERT INTO DBreport(PROJECT,BUG_TYPE,BUG_CATEGORY,SOURCE_LINE,SHORT_MESSAGE) VALUES(?,?,?,?,?) ";
+                        Element currentBug 	= 		(Element) bug;
+                        String bugType 		=  		currentBug.getAttributes().getNamedItem("type").getNodeValue();
+                        String bugPriority	=  		currentBug.getAttributes().getNamedItem("priority").getNodeValue();
+                        String instanceHash =  		currentBug.getAttributes().getNamedItem("instanceHash").getNodeValue();
+                        String bugCategory 	=  		currentBug.getAttributes().getNamedItem("category").getNodeValue();
+                        NodeList sourceFileList	=  	currentBug.getElementsByTagName("Class");
+                        String sourceFile 	= 		((Element)sourceFileList.item(0)).getAttributes().getNamedItem("classname").getNodeValue();
+                        String sMessage 	= 		currentBug.getElementsByTagName("ShortMessage").item(0).getTextContent();
+                        
+                        String sourceFileArray[] = sourceFile.split("\\.");
+                        String srcFileName = sourceFileArray[sourceFileArray.length-1];
+                        if(srcFileName.contains("$")) {
+                        	String srcFileNameDemo[] =  srcFileName.split("\\$");
+                        	srcFileName = srcFileNameDemo[0];
+                        }
+                        srcFileName = srcFileName+".java";
+                        if(Objects.equals(bugType, new String("NM_CLASS_NAMING_CONVENTION"))){
+                        }
+                        else if(sourceFile.contains("android")){
+                        }
+                        else{
+                        String sql="INSERT INTO FindBugsResult(PROJECT,BUG_INSTANCE_HASH,BUG_TYPE,BUG_PRIORITY,BUG_CATEGORY,SOURCE_LINE,SHORT_MESSAGE) VALUES(?,?,?,?,?,?,?) ";
                         
                         PreparedStatement pstmt=conn.prepareStatement(sql);
-                        pstmt.setString(1,xmlfile_path);
-                        pstmt.setString(2,bugType);
-                        pstmt.setString(3,bugCategory);
-                        pstmt.setString(4,bugLine);
-                        pstmt.setString(5,sMessage);
+                        pstmt.setString(1,jarFile);
+                        pstmt.setString(2,instanceHash);
+                        pstmt.setString(3,bugType);
+                        pstmt.setString(4,bugPriority);
+                        pstmt.setString(5,bugCategory);
+                        pstmt.setString(6,srcFileName);
+                        pstmt.setString(7,sMessage);
                         pstmt.executeUpdate();
+                        }
                     }
                 }
-            
+            }
         }
-        System.out.println("getAndReadXml finished, processed " + nList.getLength() + " substances!");
-    }		
+        System.out.println("Data inserted for "+jarFile);
 	}
 	catch(SQLException e){
-		System.out.println("1 "+e.getMessage());
+		e.printStackTrace();
 	}
 	finally{
 		try{
