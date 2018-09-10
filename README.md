@@ -1,3 +1,7 @@
+##### Updated repo found here: https://github.com/MobileEvolution/oSARA/
+
+
+
 ## oSARA
 This tool analyzes the AndroidManifest.xml file associated with Android code repositories to capture the history of all permission changes.
 
